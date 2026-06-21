@@ -113,7 +113,6 @@ python-multipart==0.0.22
 python-pptx==1.0.2
 pyttsx3==2.99
 pytz==2025.1
-pywin32==311
 PyYAML==6.0.3
 referencing==0.37.0
 regex==2026.1.15
