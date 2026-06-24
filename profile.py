@@ -1,7 +1,7 @@
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -46,6 +46,13 @@ class UpdateProfile(BaseModel):
 class ChangePassword(BaseModel):
     current_password: str
     new_password: str
+
+    @field_validator("new_password")
+    @classmethod
+    def validate_new_password(cls, value: str) -> str:
+        if len(value) < 8 or not any(char.isalpha() for char in value) or not any(char.isdigit() for char in value):
+            raise ValueError("Password must be at least 8 characters and include letters and numbers.")
+        return value
 
 
 # =========================
@@ -120,7 +127,7 @@ async def update_profile(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    current_user.name = data.name
+    current_user.name = " ".join(data.name.strip().split())
     current_user.phone = data.phone
 
     if current_user.role == UserRole.farmer:
@@ -133,10 +140,14 @@ async def update_profile(
         farmer = result.scalar_one_or_none()
 
         if farmer:
-            farmer.village = data.village
-            farmer.district = data.district
-            farmer.soil_type = data.soil_type
-            farmer.land_acres = data.land_acres
+            if data.village is not None:
+                farmer.village = data.village
+            if data.district is not None:
+                farmer.district = data.district
+            if data.soil_type is not None:
+                farmer.soil_type = data.soil_type
+            if data.land_acres is not None:
+                farmer.land_acres = data.land_acres
 
     elif current_user.role == UserRole.shop:
         result = await db.execute(
@@ -148,8 +159,10 @@ async def update_profile(
         shop = result.scalar_one_or_none()
 
         if shop:
-            shop.shop_name = data.shop_name
-            shop.location = data.location
+            if data.shop_name is not None:
+                shop.shop_name = data.shop_name
+            if data.location is not None:
+                shop.location = data.location
 
     await db.commit()
     await db.refresh(current_user)
@@ -177,12 +190,6 @@ async def change_password(
         raise HTTPException(
             status_code=400,
             detail="Current password is incorrect",
-        )
-
-    if len(data.new_password) < 6:
-        raise HTTPException(
-            status_code=400,
-            detail="Password must be at least 6 characters.",
         )
 
     current_user.password_hash = hash_password(

@@ -1,27 +1,24 @@
+import logging
+
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
-from dotenv import load_dotenv
-import google.generativeai as genai
-import os
 
 from auth import get_current_user
+from config import settings
+from gemini_client import generate_gemini_text
 
-load_dotenv()
-
-genai.configure(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+logger = logging.getLogger("cropverse")
+AI_FALLBACK_REPLY = "I'm currently unable to contact the AI service. Please try again in a few moments."
 
 router = APIRouter(
     prefix="/chatbot",
     tags=["Chatbot"]
 )
 
-model = genai.GenerativeModel("gemini-2.5-flash-lite")
-
-
 class ChatRequest(BaseModel):
     message: str
+    language: str = "English"
+    context: str = ""
 
 
 @router.post("/chat")
@@ -29,10 +26,15 @@ async def chat(
     data: ChatRequest,
     current_user=Depends(get_current_user)
 ):
+    if not settings.GEMINI_API_KEY.strip():
+        return {
+            "reply": AI_FALLBACK_REPLY
+        }
+
     try:
         prompt = f"""
 
-        You are Cropverse AI.
+        You are Cropverse AI, an expert Indian agriculture advisor.
 
         You are an agricultural advisor helping Indian farmers.
 
@@ -43,30 +45,29 @@ async def chat(
         4. Give prevention tips.
         5. Keep answers under 200 words.
         6. Focus on Indian farming conditions.
-        7. Avoid medical or unrelated advice.
+        7. Cover disease diagnosis, fertilizer suggestions, weather precautions,
+           harvest planning, and crop recommendations when relevant.
+        8. Reply in {data.language}. Use simple language.
+
+        Additional context: {data.context}
 
         Question:
         {data.message}
         """
 
-        response = model.generate_content(prompt)
-
-        print("RESPONSE:", response)
-
-        answer = getattr(response, "text", None)
+        answer = await generate_gemini_text(prompt, "gemini-2.5-flash-lite")
 
         if not answer:
             return {
-                "reply": "Gemini returned an empty response."
+                "reply": AI_FALLBACK_REPLY
             }
 
         return {
             "reply": answer
         }
 
-    except Exception as e:
-        print("ERROR:", str(e))
-
+    except Exception as exc:
+        logger.warning("Gemini advisor request failed: %s", exc.__class__.__name__)
         return {
-            "reply": f"Gemini Error: {str(e)}"
+            "reply": AI_FALLBACK_REPLY
         }

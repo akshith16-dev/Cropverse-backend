@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import Optional
 from uuid import UUID
 from db import get_db
@@ -35,7 +35,30 @@ def create_access_token(data: dict) -> str:
 
 # ─── Schemas ──────────────────────────────
 
-class RegisterFarmer(BaseModel):
+def _clean_text(value: str) -> str:
+    return " ".join(value.strip().split())
+
+def _validate_password(value: str) -> str:
+    if len(value) < 8:
+        raise ValueError("Password must be at least 8 characters")
+    if not any(char.isalpha() for char in value) or not any(char.isdigit() for char in value):
+        raise ValueError("Password must include letters and numbers")
+    return value
+
+class RegistrationBase(BaseModel):
+    @field_validator("name", "phone", mode="before", check_fields=False)
+    @classmethod
+    def sanitize_optional_text(cls, value):
+        if value is None:
+            return value
+        return _clean_text(str(value))
+
+    @field_validator("password", check_fields=False)
+    @classmethod
+    def password_strength(cls, value: str) -> str:
+        return _validate_password(value)
+
+class RegisterFarmer(RegistrationBase):
     name:       str
     email:      EmailStr
     password:   str
@@ -43,9 +66,14 @@ class RegisterFarmer(BaseModel):
     village:    str
     district:   str
     soil_type:  str
-    land_acres: float
+    land_acres: float = Field(gt=0)
 
-class RegisterShop(BaseModel):
+    @field_validator("village", "district", "soil_type", mode="before")
+    @classmethod
+    def sanitize_farmer_text(cls, value: str) -> str:
+        return _clean_text(str(value))
+
+class RegisterShop(RegistrationBase):
     name:      str
     email:     EmailStr
     password:  str
@@ -53,7 +81,12 @@ class RegisterShop(BaseModel):
     shop_name: str
     location:  str
 
-class RegisterAdmin(BaseModel):
+    @field_validator("shop_name", "location", mode="before")
+    @classmethod
+    def sanitize_shop_text(cls, value: str) -> str:
+        return _clean_text(str(value))
+
+class RegisterAdmin(RegistrationBase):
     name:     str
     email:    EmailStr
     password: str
@@ -64,6 +97,7 @@ class TokenResponse(BaseModel):
     token_type:   str
     role:         str
     user_name:    str
+    user_id:      UUID
 
 
 # ─── Register ─────────────────────────────
@@ -94,7 +128,7 @@ async def register_farmer(data: RegisterFarmer, db: AsyncSession = Depends(get_d
 
     token = create_access_token({"sub": str(user.id), "role": user.role})
     return TokenResponse(access_token=token, token_type="bearer",
-                         role=user.role, user_name=user.name)
+                         role=user.role, user_name=user.name, user_id=user.id)
 
 
 @router.post("/register/shop", response_model=TokenResponse, status_code=201)
@@ -122,7 +156,7 @@ async def register_shop(data: RegisterShop, db: AsyncSession = Depends(get_db)):
 
     token = create_access_token({"sub": str(user.id), "role": user.role})
     return TokenResponse(access_token=token, token_type="bearer",
-                         role=user.role, user_name=user.name)
+                         role=user.role, user_name=user.name, user_id=user.id)
 
 
 @router.post("/register/admin", response_model=TokenResponse, status_code=201)
@@ -141,7 +175,7 @@ async def register_admin(data: RegisterAdmin, db: AsyncSession = Depends(get_db)
 
     token = create_access_token({"sub": str(user.id), "role": user.role})
     return TokenResponse(access_token=token, token_type="bearer",
-                         role=user.role, user_name=user.name)
+                         role=user.role, user_name=user.name, user_id=user.id)
 
 
 # ─── Login ────────────────────────────────
@@ -161,7 +195,7 @@ async def login(form: OAuth2PasswordRequestForm = Depends(),
 
     token = create_access_token({"sub": str(user.id), "role": user.role})
     return TokenResponse(access_token=token, token_type="bearer",
-                         role=user.role, user_name=user.name)
+                         role=user.role, user_name=user.name, user_id=user.id)
 
 
 # ─── Get Current User ─────────────────────

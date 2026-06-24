@@ -7,7 +7,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from db import get_db
 from auth import get_current_user
-from models import Notification, User
+from models import Notification, User, UserRole
+from notification_service import create_notification as persist_notification
 
 router = APIRouter(
     prefix="/notifications",
@@ -33,14 +34,10 @@ async def create_notification(
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    notification = Notification(
-        user_id=data.user_id,
-        message=data.message,
-        type=data.type,
-    )
+    if current_user.role != UserRole.admin and data.user_id != current_user.id:
+        raise HTTPException(status_code=403, detail="Not allowed to create notifications for another user")
 
-    db.add(notification)
-
+    await persist_notification(db, data.user_id, data.message, data.type)
     await db.commit()
 
     return {
@@ -54,6 +51,7 @@ async def get_my_notifications(
     result = await db.execute(
         select(Notification)
         .where(Notification.user_id == current_user.id)
+        .order_by(Notification.sent_at.desc())
     )
 
     return result.scalars().all()

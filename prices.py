@@ -1,7 +1,7 @@
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy import select, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -13,6 +13,8 @@ from models import (
     Crop,
     UserRole
 )
+from notification_service import notify_all
+from websocket import manager
 
 router = APIRouter(
     prefix="/prices",
@@ -26,15 +28,15 @@ router = APIRouter(
 
 class PriceCreate(BaseModel):
     crop_id: UUID
-    price_per_kg: float
-    fair_price: float
-    market_name: str
+    price_per_kg: float = Field(gt=0)
+    fair_price: float = Field(gt=0)
+    market_name: str = Field(min_length=2, max_length=100)
 
 
 class PriceUpdate(BaseModel):
-    price_per_kg: float | None = None
-    fair_price: float | None = None
-    market_name: str | None = None
+    price_per_kg: float | None = Field(default=None, gt=0)
+    fair_price: float | None = Field(default=None, gt=0)
+    market_name: str | None = Field(default=None, min_length=2, max_length=100)
 
 
 # =========================
@@ -77,7 +79,14 @@ async def create_price(
 
     await db.flush()
     await db.refresh(price)
+    await notify_all(
+        db,
+        f"{crop.crop_name} price was added for {price.market_name}: ₹{price.price_per_kg}/kg.",
+        "price.created",
+    )
     await db.commit()
+
+    await manager.broadcast("prices", {"event": "price.created", "price": {"id": str(price.id), "crop_id": str(price.crop_id), "price_per_kg": price.price_per_kg, "fair_price": price.fair_price, "market_name": price.market_name, "recorded_at": price.recorded_at.isoformat()}})
 
     return {
         "message": "Price added successfully",
@@ -184,9 +193,18 @@ async def update_price(
     if data.market_name is not None:
         price.market_name = data.market_name
 
+    crop_result = await db.execute(select(Crop).where(Crop.id == price.crop_id))
+    crop = crop_result.scalar_one_or_none()
     await db.flush()
     await db.refresh(price)
+    await notify_all(
+        db,
+        f"{crop.crop_name if crop else 'Crop'} price was updated for {price.market_name}: ₹{price.price_per_kg}/kg.",
+        "price.updated",
+    )
     await db.commit()
+
+    await manager.broadcast("prices", {"event": "price.updated", "price": {"id": str(price.id), "crop_id": str(price.crop_id), "price_per_kg": price.price_per_kg, "fair_price": price.fair_price, "market_name": price.market_name, "recorded_at": price.recorded_at.isoformat()}})
 
     return {
         "message": "Price updated",
@@ -226,6 +244,7 @@ async def delete_price(
 
     await db.delete(price)
     await db.commit()
+    await manager.broadcast("prices", {"event": "price.deleted", "price_id": str(price_id)})
 
     return {
         "message": "Price deleted"

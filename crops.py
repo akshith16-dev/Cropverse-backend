@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional, List
 from uuid import UUID
 
@@ -15,21 +15,21 @@ router = APIRouter(prefix="/crops", tags=["Crops"])
 # ─── Schemas ──────────────────────────────
 
 class CropCreate(BaseModel):
-    crop_name:          str
-    season:             str
-    soil_suitability:   str
-    avg_yield_per_acre: float
-    min_price:          float
-    max_price:          float
-    cultivation_cost:   float
+    crop_name:          str = Field(min_length=2, max_length=100)
+    season:             str = Field(min_length=2, max_length=50)
+    soil_suitability:   str = Field(min_length=2, max_length=200)
+    avg_yield_per_acre: float = Field(gt=0)
+    min_price:          float = Field(ge=0)
+    max_price:          float = Field(ge=0)
+    cultivation_cost:   float = Field(ge=0)
 
 class CropUpdate(BaseModel):
     season:             Optional[str]   = None
     soil_suitability:   Optional[str]   = None
-    avg_yield_per_acre: Optional[float] = None
-    min_price:          Optional[float] = None
-    max_price:          Optional[float] = None
-    cultivation_cost:   Optional[float] = None
+    avg_yield_per_acre: Optional[float] = Field(default=None, gt=0)
+    min_price:          Optional[float] = Field(default=None, ge=0)
+    max_price:          Optional[float] = Field(default=None, ge=0)
+    cultivation_cost:   Optional[float] = Field(default=None, ge=0)
 
 class CropResponse(BaseModel):
     id:                 UUID

@@ -5,21 +5,18 @@ from pydantic import BaseModel
 from typing import Optional, List
 from uuid import UUID
 from datetime import datetime
-import google.generativeai as genai
 
 from db import get_db
+from gemini_client import generate_gemini_text
 from models import (
     CropAssignment, Farmer, Crop, User,
-    AssignmentStatus, SupplyDemandLog, AlertLevel
+    AssignmentStatus, SupplyDemandLog, AlertLevel, UserRole
 )
 from auth import require_admin, require_farmer, get_current_user
-from config import settings
+from notification_service import create_notification, notify_role
+from websocket import manager
 
 router = APIRouter(prefix="/assignments", tags=["Assignments"])
-
-# configure Gemini
-genai.configure(api_key=settings.GEMINI_API_KEY)
-
 
 # ─── Schemas ──────────────────────────────
 
@@ -57,8 +54,11 @@ async def generate_xai_explanation(
     total_farmers_this_crop: int,
     total_demand_kg: float,
 ) -> str:
-    try:
-        prompt = f"""
+    fallback = (
+        f"{crop.crop_name} was assigned to {farmer_name} based on "
+        f"soil compatibility ({farmer.soil_type}) and current market demand."
+    )
+    prompt = f"""
 You are an agricultural advisor AI for Cropverse platform.
 Explain in 2-3 simple sentences why this crop was assigned to this farmer.
 Be specific, friendly and easy to understand.
@@ -81,14 +81,7 @@ Crop details:
 
 Give a short, clear explanation starting with "This crop was assigned because..."
 """
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content(prompt)
-        return response.text.strip()
-    except Exception:
-        return (
-            f"{crop.crop_name} was assigned to {farmer_name} based on "
-            f"soil compatibility ({farmer.soil_type}) and current market demand."
-        )
+    return await generate_gemini_text(prompt, "gemini-1.5-flash") or fallback
 
 
 # ─── Check oversupply ─────────────────────
@@ -192,9 +185,17 @@ async def assign_crop(
 
     # log supply vs demand
     await check_oversupply(crop, total_supply_kg, total_demand_kg, db)
+    await create_notification(
+        db,
+        farmer.user_id,
+        f"{crop.crop_name} was assigned to you for {data.season} {data.year}.",
+        "assignment.created",
+    )
 
     await db.commit()
     await db.refresh(assignment)
+    await manager.broadcast("supply-demand", {"event": "supply_demand.updated", "crop_id": str(crop.id), "crop": crop.crop_name, "supply": total_supply_kg, "demand": total_demand_kg})
+    await manager.broadcast(f"notifications:{farmer.user_id}", {"event": "assignment.created", "assignment_id": str(assignment.id), "crop": crop.crop_name})
 
     return AssignmentResponse(
         id=assignment.id,
@@ -308,7 +309,15 @@ async def update_assignment_status(
     if farmer.user_id != current_user.id:
         raise HTTPException(status_code=403, detail="Not your assignment")
 
+    crop_result = await db.execute(select(Crop).where(Crop.id == assignment.crop_id))
+    crop = crop_result.scalar_one_or_none()
     assignment.status = data.status
+    await notify_role(
+        db,
+        UserRole.admin,
+        f"{current_user.name} {data.status} the {crop.crop_name if crop else 'crop'} assignment.",
+        "assignment.status",
+    )
     await db.commit()
 
     return {"message": f"Assignment {data.status} successfully"}

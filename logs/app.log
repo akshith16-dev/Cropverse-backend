@@ -1,0 +1,2340 @@
+2026-06-24 20:20:00,377 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 20:21:56,409 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 20:21:56,819 INFO cropverse POST /ai/recommend-crop -> 401 1.94ms
+2026-06-24 20:21:56,885 INFO cropverse POST /auth/login -> 401 41.07ms
+2026-06-24 20:21:57,025 ERROR cropverse Unhandled application error
+Traceback (most recent call last):
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 719, in app
+    raise validation_error
+fastapi.exceptions.RequestValidationError: 1 validation error:
+  {'type': 'value_error', 'loc': ('body', 'password'), 'msg': 'Value error, Password must be at least 8 characters', 'input': 'weak', 'ctx': {'error': ValueError('Password must be at least 8 characters')}}
+
+  File "E:\akshi\Cropverse\cbackend\auth.py", line 162, in register_admin
+    POST /auth/register/admin
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\cors.py", line 87, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\akshi\Cropverse\cbackend\main.py", line 81, in request_logging_and_security_headers
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 59, in wrapped_app
+    response = await handler(conn, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\akshi\Cropverse\cbackend\exceptions.py", line 17, in validation_error
+    return error_response(422, "Validation failed", exc.errors())
+  File "E:\akshi\Cropverse\cbackend\exceptions.py", line 12, in error_response
+    return JSONResponse(status_code=status_code, content={"success": False, "message": message, "details": details})
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\responses.py", line 189, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\responses.py", line 46, in __init__
+    self.body = self.render(content)
+                ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\responses.py", line 192, in render
+    return json.dumps(
+           ~~~~~~~~~~^
+        content,
+        ^^^^^^^^
+    ...<3 lines>...
+        separators=(",", ":"),
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ).encode("utf-8")
+    ^
+  File "C:\Program Files\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Program Files\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type ValueError is not JSON serializable
+2026-06-24 20:21:58,656 INFO cropverse GET / -> 200 0.64ms
+2026-06-24 20:21:58,681 INFO cropverse GET /health/db -> 200 3.96ms
+2026-06-24 20:21:58,705 INFO cropverse GET /reports/farmers -> 401 2.58ms
+2026-06-24 20:21:58,726 INFO cropverse POST /upload/image -> 401 1.69ms
+2026-06-24 20:22:47,832 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 20:22:47,995 INFO cropverse POST /ai/recommend-crop -> 401 1.73ms
+2026-06-24 20:22:48,063 INFO cropverse POST /auth/login -> 401 47.78ms
+2026-06-24 20:22:48,089 INFO cropverse POST /auth/register/admin -> 422 7.45ms
+2026-06-24 20:22:48,110 INFO cropverse GET / -> 200 1.17ms
+2026-06-24 20:22:48,135 INFO cropverse GET /health/db -> 200 2.29ms
+2026-06-24 20:22:48,159 INFO cropverse GET /reports/farmers -> 401 2.26ms
+2026-06-24 20:22:48,181 INFO cropverse POST /upload/image -> 401 2.61ms
+2026-06-24 20:38:50,174 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 20:38:50,310 ERROR cropverse Database operation failed
+Traceback (most recent call last):
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 182, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 342, in _handle_exception
+    raise error
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 164, in execute
+    self.await_(_cursor.execute(operation, parameters))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 40, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 32, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 160, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 63, in _connection_worker_thread
+    result = function()
+sqlite3.OperationalError: no such table: users
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 324, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\akshi\Cropverse\cbackend\auth.py", line 164, in register_admin
+    result = await db.execute(select(User).where(User.email == data.email))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\ext\asyncio\session.py", line 449, in execute
+    result = await greenlet_spawn(
+             ^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 201, in greenlet_spawn
+    result = context.throw(*sys.exc_info())
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<4 lines>...
+        conn,
+        ^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 182, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 342, in _handle_exception
+    raise error
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 164, in execute
+    self.await_(_cursor.execute(operation, parameters))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 40, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 32, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 160, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 63, in _connection_worker_thread
+    result = function()
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: users
+[SQL: SELECT users.id, users.name, users.email, users.password_hash, users.role, users.phone, users.is_active, users.created_at 
+FROM users 
+WHERE users.email = ?]
+[parameters: ('audit-admin@example.com',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-24 20:38:50,328 INFO cropverse POST /auth/register/admin -> 503 84.71ms
+2026-06-24 20:38:50,340 ERROR cropverse Database operation failed
+Traceback (most recent call last):
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 182, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 342, in _handle_exception
+    raise error
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 164, in execute
+    self.await_(_cursor.execute(operation, parameters))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 40, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 32, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 160, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 63, in _connection_worker_thread
+    result = function()
+sqlite3.OperationalError: no such table: users
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 324, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\akshi\Cropverse\cbackend\auth.py", line 107, in register_farmer
+    result = await db.execute(select(User).where(User.email == data.email))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\ext\asyncio\session.py", line 449, in execute
+    result = await greenlet_spawn(
+             ^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 201, in greenlet_spawn
+    result = context.throw(*sys.exc_info())
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<4 lines>...
+        conn,
+        ^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 182, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 342, in _handle_exception
+    raise error
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 164, in execute
+    self.await_(_cursor.execute(operation, parameters))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 40, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 32, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 160, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 63, in _connection_worker_thread
+    result = function()
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: users
+[SQL: SELECT users.id, users.name, users.email, users.password_hash, users.role, users.phone, users.is_active, users.created_at 
+FROM users 
+WHERE users.email = ?]
+[parameters: ('audit-farmer@example.com',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-24 20:38:50,348 INFO cropverse POST /auth/register/farmer -> 503 14.79ms
+2026-06-24 20:38:50,359 ERROR cropverse Database operation failed
+Traceback (most recent call last):
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 182, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 342, in _handle_exception
+    raise error
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 164, in execute
+    self.await_(_cursor.execute(operation, parameters))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 40, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 32, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 160, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 63, in _connection_worker_thread
+    result = function()
+sqlite3.OperationalError: no such table: users
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 324, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\akshi\Cropverse\cbackend\auth.py", line 136, in register_shop
+    result = await db.execute(select(User).where(User.email == data.email))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\ext\asyncio\session.py", line 449, in execute
+    result = await greenlet_spawn(
+             ^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 201, in greenlet_spawn
+    result = context.throw(*sys.exc_info())
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<4 lines>...
+        conn,
+        ^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 182, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 342, in _handle_exception
+    raise error
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 164, in execute
+    self.await_(_cursor.execute(operation, parameters))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 40, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 32, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 160, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 63, in _connection_worker_thread
+    result = function()
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: users
+[SQL: SELECT users.id, users.name, users.email, users.password_hash, users.role, users.phone, users.is_active, users.created_at 
+FROM users 
+WHERE users.email = ?]
+[parameters: ('audit-shop@example.com',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-24 20:38:50,365 INFO cropverse POST /auth/register/shop -> 503 12.01ms
+2026-06-24 20:38:50,376 ERROR cropverse Database operation failed
+Traceback (most recent call last):
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 182, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 342, in _handle_exception
+    raise error
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 164, in execute
+    self.await_(_cursor.execute(operation, parameters))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 40, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 32, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 160, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 63, in _connection_worker_thread
+    result = function()
+sqlite3.OperationalError: no such table: users
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 324, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\akshi\Cropverse\cbackend\auth.py", line 136, in register_shop
+    result = await db.execute(select(User).where(User.email == data.email))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\ext\asyncio\session.py", line 449, in execute
+    result = await greenlet_spawn(
+             ^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 201, in greenlet_spawn
+    result = context.throw(*sys.exc_info())
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<4 lines>...
+        conn,
+        ^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 182, in execute
+    self._adapt_connection._handle_exception(error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 342, in _handle_exception
+    raise error
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 164, in execute
+    self.await_(_cursor.execute(operation, parameters))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 40, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\cursor.py", line 32, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 160, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\mohan\AppData\Roaming\Python\Python313\site-packages\aiosqlite\core.py", line 63, in _connection_worker_thread
+    result = function()
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: users
+[SQL: SELECT users.id, users.name, users.email, users.password_hash, users.role, users.phone, users.is_active, users.created_at 
+FROM users 
+WHERE users.email = ?]
+[parameters: ('audit-shop2@example.com',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-24 20:38:50,384 INFO cropverse POST /auth/register/shop -> 503 14.16ms
+2026-06-24 20:57:29,744 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 20:57:29,928 INFO cropverse POST /ai/recommend-crop -> 401 1.82ms
+2026-06-24 20:57:29,987 INFO cropverse POST /auth/login -> 401 41.21ms
+2026-06-24 20:57:30,017 INFO cropverse POST /auth/register/admin -> 422 10.24ms
+2026-06-24 20:57:30,308 INFO cropverse POST /auth/register/admin -> 201 271.33ms
+2026-06-24 20:57:30,548 INFO cropverse POST /auth/register/farmer -> 201 238.40ms
+2026-06-24 20:57:30,788 INFO cropverse POST /auth/register/shop -> 201 237.51ms
+2026-06-24 20:57:31,031 INFO cropverse POST /auth/register/shop -> 201 241.87ms
+2026-06-24 20:57:31,053 INFO cropverse POST /crops/ -> 201 18.10ms
+2026-06-24 20:57:31,062 INFO cropverse GET /farmers/ -> 200 6.78ms
+2026-06-24 20:57:34,240 INFO cropverse POST /assignments/ -> 201 3177.13ms
+2026-06-24 20:57:34,251 INFO cropverse POST /baby-crops/ -> 400 8.91ms
+2026-06-24 20:57:34,267 INFO cropverse PUT /assignments/d324c303-2601-4276-85f8-6c1088157034/status -> 200 14.54ms
+2026-06-24 20:57:34,286 INFO cropverse POST /baby-crops/ -> 200 14.54ms
+2026-06-24 20:57:34,295 INFO cropverse GET /baby-crops/marketplace -> 200 7.79ms
+2026-06-24 20:57:34,304 INFO cropverse PUT /baby-crops/78555b9e-58b8-4190-903f-2e68721db2c8/stage -> 400 6.41ms
+2026-06-24 20:57:34,313 INFO cropverse POST /orders/ -> 400 7.69ms
+2026-06-24 20:57:34,330 INFO cropverse POST /orders/ -> 200 15.78ms
+2026-06-24 20:57:34,338 INFO cropverse GET /orders/5c07aa96-ff13-4a0a-89e6-0aa7d58144b6 -> 403 6.41ms
+2026-06-24 20:57:34,356 INFO cropverse POST /demand/ -> 200 15.93ms
+2026-06-24 20:57:34,365 INFO cropverse GET /demand/43325c58-0ea0-440f-b963-5cb2dc29f3cb -> 403 8.13ms
+2026-06-24 20:57:34,373 INFO cropverse PUT /demand/43325c58-0ea0-440f-b963-5cb2dc29f3cb -> 403 5.29ms
+2026-06-24 20:57:34,398 INFO cropverse GET / -> 200 0.96ms
+2026-06-24 20:57:34,417 INFO cropverse GET /health/db -> 200 3.47ms
+2026-06-24 20:57:34,439 INFO cropverse GET /reports/farmers -> 401 2.46ms
+2026-06-24 20:57:34,461 INFO cropverse POST /upload/image -> 401 1.54ms
+2026-06-24 21:05:35,555 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:05:35,704 INFO cropverse POST /ai/recommend-crop -> 401 1.37ms
+2026-06-24 21:05:35,764 INFO cropverse POST /auth/login -> 401 39.18ms
+2026-06-24 21:05:35,792 INFO cropverse POST /auth/register/admin -> 422 6.74ms
+2026-06-24 21:05:35,814 INFO cropverse POST /auth/register/admin -> 400 2.90ms
+2026-06-24 21:05:36,063 INFO cropverse POST /auth/login -> 200 248.07ms
+2026-06-24 21:05:36,071 INFO cropverse POST /auth/register/farmer -> 400 5.57ms
+2026-06-24 21:05:36,298 INFO cropverse POST /auth/login -> 200 225.39ms
+2026-06-24 21:05:36,304 INFO cropverse POST /auth/register/shop -> 400 4.14ms
+2026-06-24 21:05:36,535 INFO cropverse POST /auth/login -> 200 229.67ms
+2026-06-24 21:05:36,544 INFO cropverse POST /auth/register/shop -> 400 4.71ms
+2026-06-24 21:05:36,781 INFO cropverse POST /auth/login -> 200 234.66ms
+2026-06-24 21:05:36,801 INFO cropverse POST /crops/ -> 400 14.78ms
+2026-06-24 21:05:36,810 INFO cropverse GET /crops/ -> 200 5.60ms
+2026-06-24 21:05:36,824 INFO cropverse GET /farmers/ -> 200 11.26ms
+2026-06-24 21:05:36,850 INFO cropverse POST /assignments/ -> 400 22.35ms
+2026-06-24 21:05:36,862 INFO cropverse GET /assignments/ -> 200 8.96ms
+2026-06-24 21:05:36,876 INFO cropverse POST /baby-crops/ -> 400 12.06ms
+2026-06-24 21:05:36,892 INFO cropverse PUT /assignments/d324c303-2601-4276-85f8-6c1088157034/status -> 200 13.37ms
+2026-06-24 21:05:36,908 INFO cropverse POST /baby-crops/ -> 400 13.62ms
+2026-06-24 21:05:37,687 INFO cropverse GET / -> 200 0.82ms
+2026-06-24 21:05:37,709 INFO cropverse GET /health/db -> 200 3.14ms
+2026-06-24 21:05:37,729 INFO cropverse GET /reports/farmers -> 401 1.18ms
+2026-06-24 21:05:37,748 INFO cropverse POST /upload/image -> 401 1.31ms
+2026-06-24 21:06:06,580 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:06:06,744 INFO cropverse POST /ai/recommend-crop -> 401 1.30ms
+2026-06-24 21:06:06,801 INFO cropverse POST /auth/login -> 401 37.36ms
+2026-06-24 21:06:06,827 INFO cropverse POST /auth/register/admin -> 422 7.32ms
+2026-06-24 21:06:07,105 INFO cropverse POST /auth/register/admin -> 201 260.38ms
+2026-06-24 21:06:07,346 INFO cropverse POST /auth/register/farmer -> 201 238.95ms
+2026-06-24 21:06:07,586 INFO cropverse POST /auth/register/shop -> 201 238.24ms
+2026-06-24 21:06:07,832 INFO cropverse POST /auth/register/shop -> 201 244.57ms
+2026-06-24 21:06:07,851 INFO cropverse POST /crops/ -> 201 17.23ms
+2026-06-24 21:06:07,859 INFO cropverse GET /farmers/ -> 200 5.69ms
+2026-06-24 21:06:07,872 INFO cropverse POST /assignments/ -> 400 10.04ms
+2026-06-24 21:06:07,878 INFO cropverse GET /assignments/ -> 200 5.00ms
+2026-06-24 21:06:08,606 INFO cropverse GET / -> 200 0.80ms
+2026-06-24 21:06:08,625 INFO cropverse GET /health/db -> 200 2.14ms
+2026-06-24 21:06:08,642 INFO cropverse GET /reports/farmers -> 401 1.32ms
+2026-06-24 21:06:08,663 INFO cropverse POST /upload/image -> 401 1.67ms
+2026-06-24 21:06:39,177 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:06:39,325 INFO cropverse POST /ai/recommend-crop -> 401 2.60ms
+2026-06-24 21:06:39,382 INFO cropverse POST /auth/login -> 401 35.88ms
+2026-06-24 21:06:39,408 INFO cropverse POST /auth/register/admin -> 422 6.79ms
+2026-06-24 21:06:39,684 INFO cropverse POST /auth/register/admin -> 201 255.91ms
+2026-06-24 21:06:39,921 INFO cropverse POST /auth/register/farmer -> 201 235.20ms
+2026-06-24 21:06:40,169 INFO cropverse POST /auth/register/shop -> 201 246.29ms
+2026-06-24 21:06:40,420 INFO cropverse POST /auth/register/shop -> 201 249.38ms
+2026-06-24 21:06:40,439 INFO cropverse POST /crops/ -> 201 17.39ms
+2026-06-24 21:06:40,447 INFO cropverse GET /farmers/me -> 200 5.32ms
+2026-06-24 21:06:43,523 INFO cropverse POST /assignments/ -> 201 3074.15ms
+2026-06-24 21:06:43,534 INFO cropverse POST /baby-crops/ -> 400 8.91ms
+2026-06-24 21:06:43,546 INFO cropverse PUT /assignments/619e8247-0842-46c3-9e4d-b7574ddd470b/status -> 200 11.07ms
+2026-06-24 21:06:43,562 INFO cropverse POST /baby-crops/ -> 200 13.74ms
+2026-06-24 21:06:43,571 INFO cropverse GET /baby-crops/marketplace -> 200 7.91ms
+2026-06-24 21:06:43,582 INFO cropverse PUT /baby-crops/78555b9e-58b8-4190-903f-2e68721db2c8/stage -> 403 8.83ms
+2026-06-24 21:06:44,351 INFO cropverse GET / -> 200 1.05ms
+2026-06-24 21:06:44,375 INFO cropverse GET /health/db -> 200 1.98ms
+2026-06-24 21:06:44,393 INFO cropverse GET /reports/farmers -> 401 1.08ms
+2026-06-24 21:06:44,414 INFO cropverse POST /upload/image -> 401 2.74ms
+2026-06-24 21:07:30,502 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:07:30,650 INFO cropverse POST /ai/recommend-crop -> 401 1.27ms
+2026-06-24 21:07:30,716 INFO cropverse POST /auth/login -> 401 47.13ms
+2026-06-24 21:07:30,745 INFO cropverse POST /auth/register/admin -> 422 7.55ms
+2026-06-24 21:07:31,020 INFO cropverse POST /auth/register/admin -> 201 254.89ms
+2026-06-24 21:07:31,262 INFO cropverse POST /auth/register/farmer -> 201 240.68ms
+2026-06-24 21:07:31,499 INFO cropverse POST /auth/register/shop -> 201 235.30ms
+2026-06-24 21:07:31,740 INFO cropverse POST /auth/register/shop -> 201 239.44ms
+2026-06-24 21:07:31,761 INFO cropverse POST /crops/ -> 201 18.53ms
+2026-06-24 21:07:31,768 INFO cropverse GET /farmers/me -> 200 4.42ms
+2026-06-24 21:07:34,791 INFO cropverse POST /assignments/ -> 201 3021.56ms
+2026-06-24 21:07:34,799 INFO cropverse POST /baby-crops/ -> 400 5.63ms
+2026-06-24 21:07:34,813 INFO cropverse PUT /assignments/3405e8e0-a304-4937-91cf-3ff9c1bf8c01/status -> 200 12.66ms
+2026-06-24 21:07:34,827 INFO cropverse POST /baby-crops/ -> 200 12.68ms
+2026-06-24 21:07:34,843 INFO cropverse GET /baby-crops/marketplace -> 200 14.25ms
+2026-06-24 21:07:34,851 INFO cropverse PUT /baby-crops/b19c620f-5134-4ca7-8de6-0cba1a48cc30/stage -> 400 6.00ms
+2026-06-24 21:07:34,861 INFO cropverse POST /orders/ -> 400 9.09ms
+2026-06-24 21:07:34,882 INFO cropverse POST /orders/ -> 200 18.54ms
+2026-06-24 21:07:34,899 INFO cropverse GET /orders/d8f85957-6587-40f4-80b2-bf4f0c2033fb -> 403 15.51ms
+2026-06-24 21:07:34,917 INFO cropverse POST /demand/ -> 200 16.43ms
+2026-06-24 21:07:34,926 INFO cropverse GET /demand/ffd45068-6cfe-4468-aaf4-7a57ff5c81b4 -> 403 8.11ms
+2026-06-24 21:07:34,935 INFO cropverse PUT /demand/ffd45068-6cfe-4468-aaf4-7a57ff5c81b4 -> 403 6.73ms
+2026-06-24 21:07:34,959 INFO cropverse GET / -> 200 1.40ms
+2026-06-24 21:07:34,979 INFO cropverse GET /health/db -> 200 2.31ms
+2026-06-24 21:07:35,001 INFO cropverse GET /reports/farmers -> 401 2.13ms
+2026-06-24 21:07:35,023 INFO cropverse POST /upload/image -> 401 1.42ms
+2026-06-24 21:09:03,954 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:09:04,176 WARNING cropverse Redis unavailable; using local WebSocket events: No module named 'redis'
+2026-06-24 21:09:04,474 INFO cropverse POST /auth/register/admin -> 201 296.40ms
+2026-06-24 21:09:04,713 INFO cropverse POST /auth/register/farmer -> 201 237.19ms
+2026-06-24 21:09:04,953 INFO cropverse POST /auth/register/shop -> 201 238.47ms
+2026-06-24 21:09:05,189 INFO cropverse POST /auth/register/shop -> 201 233.81ms
+2026-06-24 21:09:05,211 INFO cropverse POST /crops/ -> 201 20.81ms
+2026-06-24 21:09:05,218 INFO cropverse GET /farmers/me -> 200 5.01ms
+2026-06-24 21:12:45,863 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:12:45,994 INFO cropverse POST /ai/recommend-crop -> 401 2.06ms
+2026-06-24 21:12:46,051 INFO cropverse POST /auth/login -> 401 37.25ms
+2026-06-24 21:12:46,079 INFO cropverse POST /auth/register/admin -> 422 7.97ms
+2026-06-24 21:12:46,354 INFO cropverse POST /auth/register/admin -> 201 256.68ms
+2026-06-24 21:12:46,594 INFO cropverse POST /auth/register/farmer -> 201 239.06ms
+2026-06-24 21:12:46,836 INFO cropverse POST /auth/register/shop -> 201 239.37ms
+2026-06-24 21:12:47,075 INFO cropverse POST /auth/register/shop -> 201 237.38ms
+2026-06-24 21:12:47,095 INFO cropverse POST /crops/ -> 201 17.84ms
+2026-06-24 21:12:47,102 INFO cropverse GET /farmers/me -> 200 4.91ms
+2026-06-24 21:12:47,130 INFO cropverse POST /assignments/ -> 201 26.67ms
+2026-06-24 21:12:47,137 INFO cropverse POST /baby-crops/ -> 400 5.47ms
+2026-06-24 21:12:47,151 INFO cropverse PUT /assignments/37d15930-0031-4491-afcf-a8c6574cab87/status -> 200 12.00ms
+2026-06-24 21:12:47,169 INFO cropverse POST /baby-crops/ -> 200 15.59ms
+2026-06-24 21:12:47,182 INFO cropverse GET /baby-crops/marketplace -> 200 12.09ms
+2026-06-24 21:12:47,190 INFO cropverse PUT /baby-crops/798b5a57-480b-42ff-b7bf-ec31d36e4683/stage -> 400 5.55ms
+2026-06-24 21:12:47,198 INFO cropverse POST /orders/ -> 400 6.83ms
+2026-06-24 21:12:47,215 INFO cropverse POST /orders/ -> 200 14.67ms
+2026-06-24 21:12:47,221 INFO cropverse GET /orders/73862e10-e188-4e14-b4df-6eabb6f21fb1 -> 403 4.65ms
+2026-06-24 21:12:47,239 INFO cropverse POST /demand/ -> 200 17.27ms
+2026-06-24 21:12:47,247 INFO cropverse GET /demand/5381f1f1-bf77-469a-9318-a1ea36914330 -> 403 6.28ms
+2026-06-24 21:12:47,254 INFO cropverse PUT /demand/5381f1f1-bf77-469a-9318-a1ea36914330 -> 403 5.67ms
+2026-06-24 21:12:47,280 INFO cropverse GET / -> 200 1.10ms
+2026-06-24 21:12:47,300 INFO cropverse GET /health/db -> 200 2.03ms
+2026-06-24 21:12:47,321 INFO cropverse GET /reports/farmers -> 401 1.14ms
+2026-06-24 21:12:47,342 INFO cropverse POST /upload/image -> 401 2.05ms
+2026-06-24 21:13:44,324 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:13:44,501 WARNING cropverse Redis unavailable; using local WebSocket events: No module named 'redis'
+2026-06-24 21:13:44,801 INFO cropverse POST /auth/register/admin -> 201 296.98ms
+2026-06-24 21:13:45,046 INFO cropverse POST /auth/register/farmer -> 201 242.84ms
+2026-06-24 21:13:45,293 INFO cropverse POST /auth/register/shop -> 201 245.56ms
+2026-06-24 21:13:45,537 INFO cropverse POST /auth/register/shop -> 201 239.44ms
+2026-06-24 21:13:45,556 INFO cropverse POST /crops/ -> 201 16.91ms
+2026-06-24 21:13:45,563 INFO cropverse GET /farmers/me -> 200 5.59ms
+2026-06-24 21:17:02,180 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:17:02,319 INFO cropverse POST /ai/recommend-crop -> 401 1.36ms
+2026-06-24 21:17:02,380 INFO cropverse POST /auth/login -> 401 42.84ms
+2026-06-24 21:17:02,405 INFO cropverse POST /auth/register/admin -> 422 6.87ms
+2026-06-24 21:17:02,677 INFO cropverse POST /auth/register/admin -> 201 255.21ms
+2026-06-24 21:17:02,916 INFO cropverse POST /auth/register/farmer -> 201 237.66ms
+2026-06-24 21:17:03,158 INFO cropverse POST /auth/register/shop -> 201 240.57ms
+2026-06-24 21:17:03,411 INFO cropverse POST /auth/register/shop -> 201 248.45ms
+2026-06-24 21:17:03,435 INFO cropverse POST /crops/ -> 201 21.80ms
+2026-06-24 21:17:03,443 INFO cropverse GET /farmers/me -> 200 4.91ms
+2026-06-24 21:17:03,475 INFO cropverse POST /assignments/ -> 201 30.44ms
+2026-06-24 21:17:03,486 INFO cropverse POST /baby-crops/ -> 400 8.34ms
+2026-06-24 21:17:03,502 INFO cropverse PUT /assignments/657b5840-ba9f-40c8-a107-84e664fd15f9/status -> 200 14.07ms
+2026-06-24 21:17:03,521 INFO cropverse POST /baby-crops/ -> 200 16.56ms
+2026-06-24 21:17:03,534 INFO cropverse GET /baby-crops/marketplace -> 200 11.92ms
+2026-06-24 21:17:03,542 INFO cropverse PUT /baby-crops/9ba9c6fc-44c5-4478-8a9f-3dad838a77d4/stage -> 400 6.61ms
+2026-06-24 21:17:03,552 INFO cropverse POST /orders/ -> 400 6.92ms
+2026-06-24 21:17:03,570 INFO cropverse POST /orders/ -> 200 16.08ms
+2026-06-24 21:17:03,578 INFO cropverse GET /orders/fb261704-eda5-441b-961b-6bb7d8ac5b1a -> 403 6.53ms
+2026-06-24 21:17:03,595 INFO cropverse POST /demand/ -> 200 15.73ms
+2026-06-24 21:17:03,602 INFO cropverse GET /demand/581c6cc6-e4ab-4a81-af7b-8e1d06ee6016 -> 403 5.26ms
+2026-06-24 21:17:03,609 INFO cropverse PUT /demand/581c6cc6-e4ab-4a81-af7b-8e1d06ee6016 -> 403 5.48ms
+2026-06-24 21:17:03,631 INFO cropverse GET / -> 200 0.75ms
+2026-06-24 21:17:03,651 INFO cropverse GET /health/db -> 200 2.29ms
+2026-06-24 21:17:03,670 INFO cropverse GET /reports/farmers -> 401 1.16ms
+2026-06-24 21:17:03,688 INFO cropverse POST /upload/image -> 401 1.38ms
+2026-06-24 21:17:56,152 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:17:56,328 WARNING cropverse Redis unavailable; using local WebSocket events: No module named 'redis'
+2026-06-24 21:17:56,631 INFO cropverse POST /auth/register/admin -> 201 301.58ms
+2026-06-24 21:17:56,870 INFO cropverse POST /auth/register/farmer -> 201 237.86ms
+2026-06-24 21:17:57,112 INFO cropverse POST /auth/register/shop -> 201 240.14ms
+2026-06-24 21:17:57,350 INFO cropverse POST /auth/register/shop -> 201 236.53ms
+2026-06-24 21:17:57,376 INFO cropverse POST /crops/ -> 201 24.25ms
+2026-06-24 21:17:57,386 INFO cropverse GET /farmers/me -> 200 7.13ms
+2026-06-24 21:17:59,434 INFO cropverse POST /assignments/ -> 201 2046.95ms
+2026-06-24 21:17:59,445 INFO cropverse GET /assignments/me -> 200 8.60ms
+2026-06-24 21:17:59,462 INFO cropverse PUT /assignments/a99f02fa-5c9d-4194-bdf5-c90aac652296/status -> 200 14.74ms
+2026-06-24 21:17:59,480 INFO cropverse POST /baby-crops/ -> 200 16.32ms
+2026-06-24 21:17:59,488 INFO cropverse GET /baby-crops/marketplace -> 200 6.68ms
+2026-06-24 21:17:59,514 INFO cropverse POST /orders/ -> 200 23.01ms
+2026-06-24 21:17:59,522 INFO cropverse GET /orders/me -> 200 6.98ms
+2026-06-24 21:17:59,531 INFO cropverse GET /orders/0a8efd1f-f602-4cdd-a2ad-1af26385d1e0 -> 403 7.62ms
+2026-06-24 21:17:59,547 INFO cropverse POST /demand/ -> 200 14.36ms
+2026-06-24 21:17:59,554 INFO cropverse GET /demand/me -> 200 5.38ms
+2026-06-24 21:17:59,562 INFO cropverse GET /demand/631f34de-a176-475b-bcb2-a54090a68c96 -> 403 6.57ms
+2026-06-24 21:17:59,652 INFO cropverse POST /ai/recommend-crop -> 200 88.17ms
+2026-06-24 21:18:01,659 WARNING cropverse Gemini advisor request failed: 
+2026-06-24 21:18:01,660 INFO cropverse POST /chatbot/chat -> 200 2006.17ms
+2026-06-24 21:18:01,666 INFO cropverse GET /health -> 200 3.52ms
+2026-06-24 21:21:32,083 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:21:32,222 INFO cropverse POST /ai/recommend-crop -> 401 1.30ms
+2026-06-24 21:21:32,285 INFO cropverse POST /auth/login -> 401 42.74ms
+2026-06-24 21:21:32,311 INFO cropverse POST /auth/register/admin -> 422 6.58ms
+2026-06-24 21:21:32,596 INFO cropverse POST /auth/register/admin -> 201 267.73ms
+2026-06-24 21:21:32,836 INFO cropverse POST /auth/register/farmer -> 201 239.08ms
+2026-06-24 21:21:33,076 INFO cropverse POST /auth/register/shop -> 201 237.56ms
+2026-06-24 21:21:33,315 INFO cropverse POST /auth/register/shop -> 201 236.81ms
+2026-06-24 21:21:33,339 INFO cropverse POST /crops/ -> 201 21.18ms
+2026-06-24 21:21:33,346 INFO cropverse GET /farmers/me -> 200 5.58ms
+2026-06-24 21:21:33,378 INFO cropverse POST /assignments/ -> 201 29.66ms
+2026-06-24 21:21:33,387 INFO cropverse POST /baby-crops/ -> 400 7.13ms
+2026-06-24 21:21:33,403 INFO cropverse PUT /assignments/79b73a9c-13ba-4816-8592-864ea3c1ecc3/status -> 200 14.62ms
+2026-06-24 21:21:33,423 INFO cropverse POST /baby-crops/ -> 200 17.56ms
+2026-06-24 21:21:33,437 INFO cropverse GET /baby-crops/marketplace -> 200 12.24ms
+2026-06-24 21:21:33,446 INFO cropverse PUT /baby-crops/b029e81c-76ae-4311-a3a6-4d8b43bae7fe/stage -> 400 7.47ms
+2026-06-24 21:21:33,454 INFO cropverse POST /orders/ -> 400 6.18ms
+2026-06-24 21:21:33,474 INFO cropverse POST /orders/ -> 200 18.86ms
+2026-06-24 21:21:33,482 INFO cropverse GET /orders/62a1a0ba-ed11-48fe-a3f7-430e0a9768ec -> 403 6.46ms
+2026-06-24 21:21:33,498 INFO cropverse POST /demand/ -> 200 15.24ms
+2026-06-24 21:21:33,506 INFO cropverse GET /demand/ca0514fb-d8fa-4a0f-beed-297182a337ed -> 403 5.74ms
+2026-06-24 21:21:33,513 INFO cropverse PUT /demand/ca0514fb-d8fa-4a0f-beed-297182a337ed -> 403 5.65ms
+2026-06-24 21:21:33,533 INFO cropverse GET / -> 200 0.74ms
+2026-06-24 21:21:33,553 INFO cropverse GET /health/db -> 200 2.47ms
+2026-06-24 21:21:33,573 INFO cropverse GET /reports/farmers -> 401 2.39ms
+2026-06-24 21:21:33,592 INFO cropverse POST /upload/image -> 401 1.36ms
+2026-06-24 21:22:32,518 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:22:32,703 WARNING cropverse Redis unavailable; using local WebSocket events: No module named 'redis'
+2026-06-24 21:22:33,014 INFO cropverse POST /auth/register/admin -> 201 309.04ms
+2026-06-24 21:22:33,259 INFO cropverse POST /auth/register/farmer -> 201 243.52ms
+2026-06-24 21:22:33,499 INFO cropverse POST /auth/register/shop -> 201 238.32ms
+2026-06-24 21:22:33,741 INFO cropverse POST /auth/register/shop -> 201 239.73ms
+2026-06-24 21:22:33,758 INFO cropverse POST /crops/ -> 201 15.76ms
+2026-06-24 21:22:33,766 INFO cropverse GET /farmers/me -> 200 6.16ms
+2026-06-24 21:22:33,905 WARNING cropverse Gemini request failed: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-1.5-flash:generateContent?key=[REDACTED] (Caused by NewConnectionError("HTTPSConnection(host='generativelanguage.googleapis.com', port=443): Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions"))
+2026-06-24 21:22:33,924 INFO cropverse POST /assignments/ -> 201 155.44ms
+2026-06-24 21:22:33,931 INFO cropverse GET /assignments/me -> 200 5.95ms
+2026-06-24 21:22:33,947 INFO cropverse PUT /assignments/0f2fce84-872b-400d-9f9f-8e90e8c68e8f/status -> 200 13.76ms
+2026-06-24 21:22:33,964 INFO cropverse POST /baby-crops/ -> 200 14.91ms
+2026-06-24 21:22:33,975 INFO cropverse GET /baby-crops/marketplace -> 200 9.57ms
+2026-06-24 21:22:33,992 INFO cropverse POST /orders/ -> 200 15.82ms
+2026-06-24 21:22:34,000 INFO cropverse GET /orders/me -> 200 6.55ms
+2026-06-24 21:22:34,009 INFO cropverse GET /orders/1cc10097-68e8-48c4-a6d9-d10eb3f85452 -> 403 6.61ms
+2026-06-24 21:22:34,027 INFO cropverse POST /demand/ -> 200 17.22ms
+2026-06-24 21:22:34,033 INFO cropverse GET /demand/me -> 200 4.61ms
+2026-06-24 21:22:34,040 INFO cropverse GET /demand/ff119dfe-789c-4b95-a166-b59e66b607f7 -> 403 5.48ms
+2026-06-24 21:22:34,096 INFO cropverse POST /ai/recommend-crop -> 200 54.29ms
+2026-06-24 21:22:34,134 WARNING cropverse Gemini request failed: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-flash-lite:generateContent?key=[REDACTED] (Caused by NewConnectionError("HTTPSConnection(host='generativelanguage.googleapis.com', port=443): Failed to establish a new connection: [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions"))
+2026-06-24 21:22:34,135 INFO cropverse POST /chatbot/chat -> 200 36.01ms
+2026-06-24 21:22:34,140 INFO cropverse GET /health -> 200 3.48ms
+2026-06-24 21:23:58,834 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:23:59,153 INFO cropverse POST /ai/recommend-crop -> 401 3.58ms
+2026-06-24 21:23:59,260 INFO cropverse POST /auth/login -> 401 73.67ms
+2026-06-24 21:23:59,305 INFO cropverse POST /auth/register/admin -> 422 10.88ms
+2026-06-24 21:23:59,625 INFO cropverse POST /auth/register/admin -> 201 289.17ms
+2026-06-24 21:23:59,903 INFO cropverse POST /auth/register/farmer -> 201 275.20ms
+2026-06-24 21:24:00,170 INFO cropverse POST /auth/register/shop -> 201 264.65ms
+2026-06-24 21:24:00,418 INFO cropverse POST /auth/register/shop -> 201 245.37ms
+2026-06-24 21:24:00,448 INFO cropverse POST /crops/ -> 201 28.17ms
+2026-06-24 21:24:00,460 INFO cropverse GET /farmers/me -> 200 8.01ms
+2026-06-24 21:24:00,504 INFO cropverse POST /assignments/ -> 201 42.36ms
+2026-06-24 21:24:00,517 INFO cropverse POST /baby-crops/ -> 400 9.52ms
+2026-06-24 21:24:00,532 INFO cropverse PUT /assignments/215fde86-7d6c-4dda-bdca-b999d60afdbc/status -> 200 13.15ms
+2026-06-24 21:24:00,550 INFO cropverse POST /baby-crops/ -> 200 15.76ms
+2026-06-24 21:24:00,569 INFO cropverse GET /baby-crops/marketplace -> 200 17.66ms
+2026-06-24 21:24:00,577 INFO cropverse PUT /baby-crops/f2d1630c-5196-49ae-a53f-3ad7e7006759/stage -> 400 5.53ms
+2026-06-24 21:24:00,585 INFO cropverse POST /orders/ -> 400 7.27ms
+2026-06-24 21:24:00,605 INFO cropverse POST /orders/ -> 200 18.63ms
+2026-06-24 21:24:00,613 INFO cropverse GET /orders/54f95b88-12bb-4aa5-8fbc-3ded0106f9b5 -> 403 5.99ms
+2026-06-24 21:24:00,631 INFO cropverse POST /demand/ -> 200 16.55ms
+2026-06-24 21:24:00,638 INFO cropverse GET /demand/a44ba61f-a319-4aa4-ada7-93302977f3c0 -> 403 5.09ms
+2026-06-24 21:24:00,644 INFO cropverse PUT /demand/a44ba61f-a319-4aa4-ada7-93302977f3c0 -> 403 5.06ms
+2026-06-24 21:24:00,666 INFO cropverse GET / -> 200 0.89ms
+2026-06-24 21:24:00,689 INFO cropverse GET /health/db -> 200 2.27ms
+2026-06-24 21:24:00,711 INFO cropverse GET /reports/farmers -> 401 1.84ms
+2026-06-24 21:24:00,731 INFO cropverse POST /upload/image -> 401 1.38ms
+2026-06-24 21:39:29,478 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:40:13,157 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:41:27,287 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:41:27,434 INFO cropverse POST /ai/recommend-crop -> 401 1.40ms
+2026-06-24 21:41:27,490 INFO cropverse POST /auth/login -> 401 37.06ms
+2026-06-24 21:41:27,522 INFO cropverse POST /auth/register/admin -> 422 12.55ms
+2026-06-24 21:41:27,836 INFO cropverse POST /auth/register/admin -> 201 295.09ms
+2026-06-24 21:41:28,078 INFO cropverse POST /auth/register/farmer -> 201 240.64ms
+2026-06-24 21:41:28,317 INFO cropverse POST /auth/register/shop -> 201 236.44ms
+2026-06-24 21:41:28,562 INFO cropverse POST /auth/register/shop -> 201 243.71ms
+2026-06-24 21:41:28,583 INFO cropverse POST /crops/ -> 201 19.33ms
+2026-06-24 21:41:28,590 INFO cropverse GET /farmers/me -> 200 5.01ms
+2026-06-24 21:41:28,619 INFO cropverse POST /assignments/ -> 201 26.58ms
+2026-06-24 21:41:28,626 INFO cropverse POST /baby-crops/ -> 400 5.66ms
+2026-06-24 21:41:28,640 INFO cropverse PUT /assignments/7654747d-e12b-4076-8a1d-36ce9bd9d7fa/status -> 200 12.25ms
+2026-06-24 21:41:28,654 INFO cropverse POST /baby-crops/ -> 200 12.62ms
+2026-06-24 21:41:28,670 INFO cropverse GET /baby-crops/marketplace -> 200 14.72ms
+2026-06-24 21:41:28,677 INFO cropverse PUT /baby-crops/61cc67b8-717b-402f-bd84-05eadb5abafa/stage -> 400 5.08ms
+2026-06-24 21:41:28,684 INFO cropverse POST /orders/ -> 400 6.60ms
+2026-06-24 21:41:28,701 INFO cropverse POST /orders/ -> 200 15.13ms
+2026-06-24 21:41:28,708 INFO cropverse GET /orders/1d868e41-356a-44b3-85c8-ecefa2a2410b -> 403 5.08ms
+2026-06-24 21:41:28,724 INFO cropverse POST /demand/ -> 200 14.83ms
+2026-06-24 21:41:28,730 INFO cropverse GET /demand/84c660c0-21c1-440c-a4f6-68484af19eb8 -> 403 5.07ms
+2026-06-24 21:41:28,736 INFO cropverse PUT /demand/84c660c0-21c1-440c-a4f6-68484af19eb8 -> 403 5.01ms
+2026-06-24 21:41:28,757 INFO cropverse GET / -> 200 0.79ms
+2026-06-24 21:41:28,776 INFO cropverse GET /health/db -> 200 2.88ms
+2026-06-24 21:41:28,793 INFO cropverse GET /reports/farmers -> 401 1.32ms
+2026-06-24 21:41:28,813 INFO cropverse POST /upload/image -> 401 1.57ms
+2026-06-24 21:42:32,053 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:44:04,276 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:44:05,384 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:44:05,591 INFO cropverse POST /ai/recommend-crop -> 401 2.73ms
+2026-06-24 21:44:05,721 INFO cropverse POST /auth/login -> 401 88.59ms
+2026-06-24 21:44:05,754 INFO cropverse POST /auth/register/admin -> 422 6.89ms
+2026-06-24 21:44:06,045 INFO cropverse POST /auth/register/admin -> 201 268.51ms
+2026-06-24 21:44:06,283 INFO cropverse POST /auth/register/farmer -> 201 236.39ms
+2026-06-24 21:44:06,516 INFO cropverse POST /auth/register/shop -> 201 231.33ms
+2026-06-24 21:44:06,752 INFO cropverse POST /auth/register/shop -> 201 234.62ms
+2026-06-24 21:44:06,771 INFO cropverse POST /crops/ -> 201 17.77ms
+2026-06-24 21:44:06,779 INFO cropverse GET /farmers/me -> 200 6.24ms
+2026-06-24 21:44:06,805 INFO cropverse POST /assignments/ -> 201 23.86ms
+2026-06-24 21:44:06,815 INFO cropverse POST /baby-crops/ -> 400 7.12ms
+2026-06-24 21:44:06,829 INFO cropverse PUT /assignments/32ffc4ef-cd93-4548-9bfd-a5b84a106573/status -> 200 13.21ms
+2026-06-24 21:44:06,846 INFO cropverse POST /baby-crops/ -> 200 14.91ms
+2026-06-24 21:44:06,863 INFO cropverse GET /baby-crops/marketplace -> 200 15.81ms
+2026-06-24 21:44:06,870 INFO cropverse PUT /baby-crops/da7659e8-c207-475b-a8e7-8efef352688f/stage -> 400 5.28ms
+2026-06-24 21:44:06,879 INFO cropverse POST /orders/ -> 400 7.47ms
+2026-06-24 21:44:06,896 INFO cropverse POST /orders/ -> 200 16.22ms
+2026-06-24 21:44:06,903 INFO cropverse GET /orders/1cbd53ac-deb7-4e0e-b5bd-d215c74275cc -> 403 5.10ms
+2026-06-24 21:44:06,920 INFO cropverse POST /demand/ -> 200 16.15ms
+2026-06-24 21:44:06,928 INFO cropverse GET /demand/3e0f96fd-fd69-4415-99a8-cfe131c941f0 -> 403 5.99ms
+2026-06-24 21:44:06,934 INFO cropverse PUT /demand/3e0f96fd-fd69-4415-99a8-cfe131c941f0 -> 403 4.89ms
+2026-06-24 21:44:06,955 INFO cropverse GET / -> 200 0.82ms
+2026-06-24 21:44:06,975 INFO cropverse GET /health/db -> 200 2.66ms
+2026-06-24 21:44:06,995 INFO cropverse GET /reports/farmers -> 401 2.84ms
+2026-06-24 21:44:07,016 INFO cropverse POST /upload/image -> 401 1.55ms
+2026-06-24 21:44:47,716 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:45:03,401 INFO cropverse GET / -> 200 3.18ms
+2026-06-24 21:45:30,510 INFO cropverse GET /docs -> 200 0.46ms
+2026-06-24 21:45:30,933 INFO cropverse GET /openapi.json -> 200 183.83ms
+2026-06-24 21:52:19,175 INFO cropverse GET /crops/ -> 200 895.54ms
+2026-06-24 21:52:19,214 INFO cropverse GET /prices/ -> 200 330.60ms
+2026-06-24 21:52:19,244 INFO cropverse GET /notifications/ -> 200 380.65ms
+2026-06-24 21:52:19,248 INFO cropverse GET /orders/ -> 200 967.65ms
+2026-06-24 21:52:19,269 INFO cropverse GET /shops/ -> 200 386.33ms
+2026-06-24 21:52:19,277 INFO cropverse GET /farmers/ -> 200 1003.20ms
+2026-06-24 21:52:19,320 INFO cropverse GET /crops/ -> 200 120.58ms
+2026-06-24 21:52:19,331 INFO cropverse GET /prices/ -> 200 84.37ms
+2026-06-24 21:52:19,352 INFO cropverse GET /notifications/ -> 200 82.84ms
+2026-06-24 21:52:19,362 INFO cropverse GET /orders/ -> 200 79.01ms
+2026-06-24 21:52:19,364 INFO cropverse GET /shops/ -> 200 73.88ms
+2026-06-24 21:52:19,369 INFO cropverse GET /farmers/ -> 200 78.95ms
+2026-06-24 21:52:19,725 INFO cropverse GET /analytics/admin -> 200 74.46ms
+2026-06-24 21:52:19,764 INFO cropverse GET /analytics/admin -> 200 33.43ms
+2026-06-24 21:53:46,353 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 21:54:03,050 INFO cropverse GET /health -> 200 8.98ms
+2026-06-24 21:56:12,431 INFO cropverse GET /crops/ -> 200 16.95ms
+2026-06-24 21:56:12,438 INFO cropverse GET /prices/ -> 200 25.64ms
+2026-06-24 21:56:12,446 INFO cropverse GET /notifications/ -> 200 35.71ms
+2026-06-24 21:56:12,451 INFO cropverse GET /farmers/ -> 200 38.45ms
+2026-06-24 21:56:12,455 INFO cropverse GET /shops/ -> 200 42.36ms
+2026-06-24 21:56:12,458 INFO cropverse GET /orders/ -> 200 42.70ms
+2026-06-24 21:56:12,482 INFO cropverse GET /crops/ -> 200 44.28ms
+2026-06-24 21:56:12,486 INFO cropverse GET /prices/ -> 200 36.38ms
+2026-06-24 21:56:12,500 INFO cropverse GET /notifications/ -> 200 45.20ms
+2026-06-24 21:56:12,507 INFO cropverse GET /farmers/ -> 200 47.72ms
+2026-06-24 21:56:12,510 INFO cropverse GET /orders/ -> 200 44.34ms
+2026-06-24 21:56:12,518 INFO cropverse GET /shops/ -> 200 52.73ms
+2026-06-24 21:56:12,569 INFO cropverse GET /analytics/admin -> 200 49.04ms
+2026-06-24 21:56:12,603 INFO cropverse GET /analytics/admin -> 200 29.38ms
+2026-06-24 21:59:20,897 INFO cropverse GET /prices/ -> 200 205.46ms
+2026-06-24 21:59:20,928 INFO cropverse GET /notifications/ -> 200 234.92ms
+2026-06-24 21:59:20,930 INFO cropverse GET /crops/ -> 200 235.64ms
+2026-06-24 21:59:20,944 INFO cropverse GET /farmers/ -> 200 250.05ms
+2026-06-24 21:59:20,956 INFO cropverse GET /orders/ -> 200 262.85ms
+2026-06-24 21:59:20,959 INFO cropverse GET /shops/ -> 200 264.83ms
+2026-06-24 21:59:21,020 INFO cropverse GET /prices/ -> 200 91.77ms
+2026-06-24 21:59:21,036 INFO cropverse GET /crops/ -> 200 73.53ms
+2026-06-24 21:59:21,082 INFO cropverse GET /orders/ -> 200 98.38ms
+2026-06-24 21:59:21,114 INFO cropverse GET /notifications/ -> 200 151.71ms
+2026-06-24 21:59:21,127 INFO cropverse GET /shops/ -> 200 143.43ms
+2026-06-24 21:59:21,144 INFO cropverse GET /farmers/ -> 200 168.36ms
+2026-06-24 21:59:21,231 INFO cropverse GET /analytics/admin -> 200 97.62ms
+2026-06-24 21:59:21,314 INFO cropverse GET /analytics/admin -> 200 78.84ms
+2026-06-24 22:05:58,393 INFO cropverse GET /crops/ -> 200 132.48ms
+2026-06-24 22:05:58,399 INFO cropverse GET /prices/ -> 200 98.11ms
+2026-06-24 22:05:58,430 INFO cropverse GET /shops/ -> 200 171.07ms
+2026-06-24 22:05:58,431 INFO cropverse GET /notifications/ -> 200 173.01ms
+2026-06-24 22:05:58,439 INFO cropverse GET /orders/ -> 200 179.82ms
+2026-06-24 22:05:58,457 INFO cropverse GET /farmers/ -> 200 151.66ms
+2026-06-24 22:05:58,477 INFO cropverse GET /prices/ -> 200 54.86ms
+2026-06-24 22:05:58,479 INFO cropverse GET /crops/ -> 200 64.17ms
+2026-06-24 22:05:58,505 INFO cropverse GET /notifications/ -> 200 56.39ms
+2026-06-24 22:05:58,513 INFO cropverse GET /shops/ -> 200 64.19ms
+2026-06-24 22:05:58,519 INFO cropverse GET /orders/ -> 200 65.02ms
+2026-06-24 22:05:58,527 INFO cropverse GET /farmers/ -> 200 62.20ms
+2026-06-24 22:05:58,640 INFO cropverse GET /analytics/admin -> 200 61.45ms
+2026-06-24 22:05:58,686 INFO cropverse GET /analytics/admin -> 200 38.68ms
+2026-06-24 22:06:27,770 INFO cropverse POST /auth/login -> 200 372.11ms
+2026-06-24 22:06:27,862 INFO cropverse GET /prices/ -> 200 57.31ms
+2026-06-24 22:06:27,867 INFO cropverse GET /crops/ -> 200 57.34ms
+2026-06-24 22:06:27,879 INFO cropverse GET /notifications/ -> 200 78.53ms
+2026-06-24 22:06:27,887 INFO cropverse GET /farmers/ -> 200 81.66ms
+2026-06-24 22:06:27,891 INFO cropverse GET /shops/ -> 200 81.05ms
+2026-06-24 22:06:27,900 INFO cropverse GET /orders/ -> 200 80.97ms
+2026-06-24 22:06:27,917 INFO cropverse GET /crops/ -> 200 38.33ms
+2026-06-24 22:06:27,918 INFO cropverse GET /prices/ -> 200 43.92ms
+2026-06-24 22:06:27,958 INFO cropverse GET /notifications/ -> 200 65.76ms
+2026-06-24 22:06:27,963 INFO cropverse GET /farmers/ -> 200 65.31ms
+2026-06-24 22:06:27,998 INFO cropverse GET /shops/ -> 200 98.12ms
+2026-06-24 22:06:28,019 INFO cropverse GET /orders/ -> 200 112.00ms
+2026-06-24 22:06:28,067 INFO cropverse GET /analytics/admin -> 200 122.87ms
+2026-06-24 22:06:28,116 INFO cropverse GET /analytics/admin -> 200 41.47ms
+2026-06-24 22:06:29,570 INFO cropverse GET /shops/ -> 200 28.50ms
+2026-06-24 22:06:29,609 INFO cropverse GET /shops/ -> 200 28.18ms
+2026-06-24 22:06:32,739 INFO cropverse GET /crops/ -> 200 19.84ms
+2026-06-24 22:06:32,752 INFO cropverse GET /farmers/ -> 200 35.59ms
+2026-06-24 22:06:32,767 INFO cropverse GET /shops/ -> 200 48.83ms
+2026-06-24 22:06:32,788 INFO cropverse GET /orders/ -> 200 66.92ms
+2026-06-24 22:06:32,822 INFO cropverse GET /crops/ -> 200 71.79ms
+2026-06-24 22:06:32,855 INFO cropverse GET /farmers/ -> 200 91.57ms
+2026-06-24 22:06:32,872 INFO cropverse GET /shops/ -> 200 88.14ms
+2026-06-24 22:06:32,884 INFO cropverse GET /orders/ -> 200 74.65ms
+2026-06-24 22:06:32,935 INFO cropverse GET /analytics/admin -> 200 83.12ms
+2026-06-24 22:06:32,984 INFO cropverse GET /analytics/admin -> 200 41.12ms
+2026-06-24 22:06:59,124 INFO cropverse GET /shops/ -> 200 15.97ms
+2026-06-24 22:06:59,149 INFO cropverse GET /shops/ -> 200 17.03ms
+2026-06-24 22:07:03,712 INFO cropverse GET /crops/ -> 200 13.58ms
+2026-06-24 22:07:03,724 INFO cropverse GET /farmers/ -> 200 28.76ms
+2026-06-24 22:07:03,737 INFO cropverse GET /crops/ -> 200 17.39ms
+2026-06-24 22:07:03,752 INFO cropverse GET /farmers/ -> 200 21.06ms
+2026-06-24 22:07:17,007 INFO cropverse POST /assignments/ -> 400 44.64ms
+2026-06-24 22:07:30,089 WARNING cropverse Gemini request failed: HTTPError
+2026-06-24 22:07:30,137 INFO cropverse POST /assignments/ -> 201 1142.62ms
+2026-06-24 22:07:32,360 INFO cropverse GET /prices/ -> 200 16.85ms
+2026-06-24 22:07:32,369 INFO cropverse GET /crops/ -> 200 23.92ms
+2026-06-24 22:07:32,390 INFO cropverse GET /prices/ -> 200 25.38ms
+2026-06-24 22:07:32,398 INFO cropverse GET /crops/ -> 200 19.24ms
+2026-06-24 22:07:46,805 INFO cropverse POST /prices/ -> 200 29.89ms
+2026-06-24 22:07:46,818 INFO cropverse GET /prices/ -> 200 7.79ms
+2026-06-24 22:07:46,820 INFO cropverse GET /crops/ -> 200 8.97ms
+2026-06-24 22:07:53,435 INFO cropverse GET /analytics/admin -> 200 37.07ms
+2026-06-24 22:07:53,496 INFO cropverse GET /analytics/admin -> 200 55.51ms
+2026-06-24 22:07:53,512 INFO cropverse GET /farmers/ -> 200 35.76ms
+2026-06-24 22:07:53,532 INFO cropverse GET /farmers/ -> 200 11.47ms
+2026-06-24 22:08:08,719 INFO cropverse POST /chatbot/chat -> 200 4789.55ms
+2026-06-24 22:08:24,591 INFO cropverse GET /crops/ -> 200 44.45ms
+2026-06-24 22:08:24,623 INFO cropverse GET /farmers/ -> 200 97.52ms
+2026-06-24 22:08:24,625 INFO cropverse GET /shops/ -> 200 90.94ms
+2026-06-24 22:08:24,656 INFO cropverse GET /orders/ -> 200 108.35ms
+2026-06-24 22:08:24,710 INFO cropverse GET /crops/ -> 200 96.29ms
+2026-06-24 22:08:24,793 INFO cropverse GET /shops/ -> 200 153.42ms
+2026-06-24 22:08:24,814 INFO cropverse GET /farmers/ -> 200 169.51ms
+2026-06-24 22:08:24,828 INFO cropverse GET /orders/ -> 200 156.43ms
+2026-06-24 22:08:24,897 INFO cropverse GET /analytics/admin -> 200 146.30ms
+2026-06-24 22:08:24,946 INFO cropverse GET /analytics/admin -> 200 37.90ms
+2026-06-24 22:08:34,126 INFO cropverse POST /auth/login -> 200 232.32ms
+2026-06-24 22:08:34,239 INFO cropverse GET /prices/ -> 200 41.91ms
+2026-06-24 22:08:34,264 INFO cropverse GET /notifications/ -> 200 65.51ms
+2026-06-24 22:08:34,293 INFO cropverse GET /assignments/me -> 200 94.50ms
+2026-06-24 22:08:34,294 INFO cropverse GET /prices/ -> 200 41.65ms
+2026-06-24 22:08:34,308 INFO cropverse GET /notifications/ -> 200 24.22ms
+2026-06-24 22:08:34,315 INFO cropverse GET /assignments/me -> 200 16.86ms
+2026-06-24 22:08:36,434 INFO cropverse GET /baby-crops/ -> 200 54.36ms
+2026-06-24 22:08:36,458 INFO cropverse GET /baby-crops/ -> 200 17.40ms
+2026-06-24 22:08:46,670 INFO cropverse GET /notifications/ -> 200 13.95ms
+2026-06-24 22:08:46,693 INFO cropverse GET /notifications/ -> 200 20.12ms
+2026-06-24 22:08:48,055 INFO cropverse GET /baby-crops/ -> 200 22.73ms
+2026-06-24 22:08:48,091 INFO cropverse GET /baby-crops/ -> 200 22.70ms
+2026-06-24 22:09:24,002 INFO cropverse GET /baby-crops/ -> 200 19.61ms
+2026-06-24 22:09:24,043 INFO cropverse GET /baby-crops/ -> 200 36.19ms
+2026-06-24 22:09:26,745 INFO cropverse GET /assignments/me -> 200 9.55ms
+2026-06-24 22:09:26,771 INFO cropverse GET /assignments/me -> 200 23.74ms
+2026-06-24 22:09:29,763 INFO cropverse GET /baby-crops/ -> 200 11.27ms
+2026-06-24 22:09:29,830 INFO cropverse GET /baby-crops/ -> 200 36.57ms
+2026-06-24 22:09:31,597 INFO cropverse GET /assignments/me -> 200 11.59ms
+2026-06-24 22:09:31,629 INFO cropverse GET /assignments/me -> 200 25.95ms
+2026-06-24 22:09:36,339 INFO cropverse GET /baby-crops/ -> 200 20.08ms
+2026-06-24 22:09:36,399 INFO cropverse GET /baby-crops/ -> 200 52.33ms
+2026-06-24 22:09:49,005 INFO cropverse GET /notifications/ -> 200 15.27ms
+2026-06-24 22:09:49,035 INFO cropverse GET /notifications/ -> 200 21.70ms
+2026-06-24 22:09:52,941 INFO cropverse GET /baby-crops/ -> 200 38.56ms
+2026-06-24 22:09:52,974 INFO cropverse GET /baby-crops/ -> 200 24.26ms
+2026-06-24 22:09:58,020 INFO cropverse GET /assignments/me -> 200 16.54ms
+2026-06-24 22:09:58,052 INFO cropverse GET /assignments/me -> 200 21.93ms
+2026-06-24 22:10:00,669 INFO cropverse GET /profile/me -> 200 19.17ms
+2026-06-24 22:10:00,713 INFO cropverse GET /profile/me -> 200 40.29ms
+2026-06-24 22:10:00,724 INFO cropverse GET /assignments/me -> 200 44.18ms
+2026-06-24 22:10:00,737 INFO cropverse GET /baby-crops/ -> 200 37.46ms
+2026-06-24 22:10:00,790 INFO cropverse GET /assignments/me -> 200 55.74ms
+2026-06-24 22:10:00,805 INFO cropverse GET /baby-crops/ -> 200 64.08ms
+2026-06-24 22:10:16,501 INFO cropverse POST /auth/login -> 401 232.29ms
+2026-06-24 22:10:21,763 INFO cropverse POST /auth/login -> 200 239.47ms
+2026-06-24 22:10:21,905 INFO cropverse GET /prices/ -> 200 54.25ms
+2026-06-24 22:10:21,911 INFO cropverse GET /notifications/ -> 200 73.27ms
+2026-06-24 22:10:21,919 INFO cropverse GET /baby-crops/marketplace -> 200 75.61ms
+2026-06-24 22:10:21,946 INFO cropverse GET /orders/me -> 200 79.55ms
+2026-06-24 22:10:21,948 INFO cropverse GET /prices/ -> 200 35.94ms
+2026-06-24 22:10:21,954 INFO cropverse GET /demand/me -> 200 71.75ms
+2026-06-24 22:10:21,964 INFO cropverse GET /notifications/ -> 200 45.88ms
+2026-06-24 22:10:21,980 INFO cropverse GET /baby-crops/marketplace -> 200 55.99ms
+2026-06-24 22:10:22,012 INFO cropverse GET /orders/me -> 200 58.35ms
+2026-06-24 22:10:22,017 INFO cropverse GET /demand/me -> 200 56.26ms
+2026-06-24 22:10:24,534 INFO cropverse GET /baby-crops/marketplace -> 200 14.11ms
+2026-06-24 22:10:24,557 INFO cropverse GET /baby-crops/marketplace -> 200 18.58ms
+2026-06-24 22:10:47,435 INFO cropverse POST /orders/ -> 200 115.33ms
+2026-06-24 22:10:53,887 INFO cropverse GET /crops/ -> 200 22.07ms
+2026-06-24 22:10:53,920 INFO cropverse GET /crops/ -> 200 12.22ms
+2026-06-24 22:10:53,927 INFO cropverse GET /demand/me -> 200 56.98ms
+2026-06-24 22:10:53,954 INFO cropverse GET /demand/me -> 200 19.34ms
+2026-06-24 22:11:20,675 INFO cropverse POST /demand/ -> 200 31.52ms
+2026-06-24 22:11:20,685 INFO cropverse GET /crops/ -> 200 5.95ms
+2026-06-24 22:11:20,694 INFO cropverse GET /demand/me -> 200 14.37ms
+2026-06-24 22:11:24,605 INFO cropverse GET /orders/me -> 200 24.39ms
+2026-06-24 22:11:24,651 INFO cropverse GET /orders/me -> 200 35.94ms
+2026-06-24 22:11:34,726 INFO cropverse GET /notifications/ -> 200 15.86ms
+2026-06-24 22:11:34,766 INFO cropverse GET /notifications/ -> 200 30.59ms
+2026-06-24 22:11:36,677 INFO cropverse GET /crops/ -> 200 26.17ms
+2026-06-24 22:11:36,716 INFO cropverse GET /demand/me -> 200 60.14ms
+2026-06-24 22:11:36,728 INFO cropverse GET /crops/ -> 200 28.41ms
+2026-06-24 22:11:36,761 INFO cropverse GET /demand/me -> 200 35.25ms
+2026-06-24 22:11:39,768 INFO cropverse GET /baby-crops/marketplace -> 200 39.22ms
+2026-06-24 22:11:39,778 INFO cropverse GET /demand/me -> 200 47.65ms
+2026-06-24 22:11:39,787 INFO cropverse GET /orders/me -> 200 56.33ms
+2026-06-24 22:11:39,849 INFO cropverse GET /baby-crops/marketplace -> 200 68.11ms
+2026-06-24 22:11:39,862 INFO cropverse GET /demand/me -> 200 69.72ms
+2026-06-24 22:11:39,870 INFO cropverse GET /orders/me -> 200 68.23ms
+2026-06-24 22:11:54,187 INFO cropverse GET /baby-crops/marketplace -> 200 22.21ms
+2026-06-24 22:11:54,234 INFO cropverse GET /baby-crops/marketplace -> 200 29.44ms
+2026-06-24 22:11:54,810 INFO cropverse GET /crops/ -> 200 6.63ms
+2026-06-24 22:11:54,869 INFO cropverse GET /crops/ -> 200 51.47ms
+2026-06-24 22:11:54,879 INFO cropverse GET /demand/me -> 200 72.52ms
+2026-06-24 22:11:54,918 INFO cropverse GET /demand/me -> 200 29.84ms
+2026-06-24 22:11:57,573 INFO cropverse GET /orders/me -> 200 18.80ms
+2026-06-24 22:11:57,612 INFO cropverse GET /orders/me -> 200 30.59ms
+2026-06-24 22:11:58,582 INFO cropverse GET /notifications/ -> 200 11.43ms
+2026-06-24 22:11:58,612 INFO cropverse GET /notifications/ -> 200 18.08ms
+2026-06-24 22:12:00,983 INFO cropverse GET /baby-crops/marketplace -> 200 39.68ms
+2026-06-24 22:12:01,016 INFO cropverse GET /demand/me -> 200 70.20ms
+2026-06-24 22:12:01,041 INFO cropverse GET /orders/me -> 200 92.11ms
+2026-06-24 22:12:01,063 INFO cropverse GET /baby-crops/marketplace -> 200 67.22ms
+2026-06-24 22:12:01,094 INFO cropverse GET /demand/me -> 200 47.29ms
+2026-06-24 22:12:01,097 INFO cropverse GET /orders/me -> 200 48.10ms
+2026-06-24 22:12:03,690 INFO cropverse POST /auth/login -> 200 231.49ms
+2026-06-24 22:12:03,748 INFO cropverse GET /prices/ -> 200 35.69ms
+2026-06-24 22:12:03,763 INFO cropverse GET /crops/ -> 200 40.69ms
+2026-06-24 22:12:03,776 INFO cropverse GET /farmers/ -> 200 64.25ms
+2026-06-24 22:12:03,782 INFO cropverse GET /notifications/ -> 200 74.27ms
+2026-06-24 22:12:03,788 INFO cropverse GET /orders/ -> 200 70.51ms
+2026-06-24 22:12:03,804 INFO cropverse GET /shops/ -> 200 83.16ms
+2026-06-24 22:12:03,833 INFO cropverse GET /prices/ -> 200 76.60ms
+2026-06-24 22:12:03,847 INFO cropverse GET /crops/ -> 200 55.90ms
+2026-06-24 22:12:03,871 INFO cropverse GET /orders/ -> 200 62.95ms
+2026-06-24 22:12:03,873 INFO cropverse GET /notifications/ -> 200 65.01ms
+2026-06-24 22:12:03,889 INFO cropverse GET /farmers/ -> 200 86.07ms
+2026-06-24 22:12:03,891 INFO cropverse GET /shops/ -> 200 69.65ms
+2026-06-24 22:12:03,971 INFO cropverse GET /analytics/admin -> 200 115.63ms
+2026-06-24 22:12:04,011 INFO cropverse GET /analytics/admin -> 200 34.42ms
+2026-06-24 22:12:05,452 INFO cropverse GET /crops/ -> 200 30.42ms
+2026-06-24 22:12:05,469 INFO cropverse GET /farmers/ -> 200 51.87ms
+2026-06-24 22:12:05,484 INFO cropverse GET /crops/ -> 200 22.26ms
+2026-06-24 22:12:05,508 INFO cropverse GET /farmers/ -> 200 31.86ms
+2026-06-24 22:12:07,344 INFO cropverse GET /shops/ -> 200 8.70ms
+2026-06-24 22:12:07,376 INFO cropverse GET /shops/ -> 200 25.47ms
+2026-06-24 22:12:09,521 INFO cropverse GET /analytics/admin -> 200 25.46ms
+2026-06-24 22:12:09,598 INFO cropverse GET /farmers/ -> 200 39.29ms
+2026-06-24 22:12:09,642 INFO cropverse GET /analytics/admin -> 200 116.84ms
+2026-06-24 22:12:09,645 INFO cropverse GET /farmers/ -> 200 38.06ms
+2026-06-24 22:12:13,207 INFO cropverse GET /crops/ -> 200 14.32ms
+2026-06-24 22:12:13,212 INFO cropverse GET /farmers/ -> 200 21.87ms
+2026-06-24 22:12:13,242 INFO cropverse GET /crops/ -> 200 28.02ms
+2026-06-24 22:12:13,263 INFO cropverse GET /farmers/ -> 200 34.55ms
+2026-06-24 22:12:14,721 INFO cropverse GET /shops/ -> 200 18.43ms
+2026-06-24 22:12:14,754 INFO cropverse GET /shops/ -> 200 22.00ms
+2026-06-24 22:12:17,606 INFO cropverse GET /crops/ -> 200 34.18ms
+2026-06-24 22:12:17,625 INFO cropverse GET /shops/ -> 200 52.16ms
+2026-06-24 22:12:17,634 INFO cropverse GET /farmers/ -> 200 64.67ms
+2026-06-24 22:12:17,659 INFO cropverse GET /orders/ -> 200 79.47ms
+2026-06-24 22:12:17,675 INFO cropverse GET /crops/ -> 200 52.88ms
+2026-06-24 22:12:17,709 INFO cropverse GET /shops/ -> 200 65.67ms
+2026-06-24 22:12:17,719 INFO cropverse GET /farmers/ -> 200 60.93ms
+2026-06-24 22:12:17,731 INFO cropverse GET /orders/ -> 200 67.85ms
+2026-06-24 22:12:17,786 INFO cropverse GET /analytics/admin -> 200 73.19ms
+2026-06-24 22:12:17,817 INFO cropverse GET /analytics/admin -> 200 24.30ms
+2026-06-24 22:12:26,853 INFO cropverse POST /auth/login -> 200 232.67ms
+2026-06-24 22:12:26,893 INFO cropverse GET /prices/ -> 200 13.66ms
+2026-06-24 22:12:26,954 INFO cropverse GET /notifications/ -> 200 78.27ms
+2026-06-24 22:12:26,997 INFO cropverse GET /assignments/me -> 200 118.11ms
+2026-06-24 22:12:27,005 INFO cropverse GET /prices/ -> 200 46.82ms
+2026-06-24 22:12:27,016 INFO cropverse GET /notifications/ -> 200 40.51ms
+2026-06-24 22:12:27,034 INFO cropverse GET /assignments/me -> 200 29.34ms
+2026-06-24 22:12:28,893 INFO cropverse GET /baby-crops/ -> 200 18.42ms
+2026-06-24 22:12:28,921 INFO cropverse GET /baby-crops/ -> 200 23.59ms
+2026-06-24 22:12:30,890 INFO cropverse GET /baby-crops/ -> 200 23.33ms
+2026-06-24 22:12:30,922 INFO cropverse GET /baby-crops/ -> 200 20.08ms
+2026-06-24 22:12:40,214 INFO cropverse GET /assignments/me -> 200 11.75ms
+2026-06-24 22:12:40,289 INFO cropverse GET /assignments/me -> 200 54.93ms
+2026-06-24 22:12:45,956 INFO cropverse GET /baby-crops/ -> 200 15.80ms
+2026-06-24 22:12:45,980 INFO cropverse GET /baby-crops/ -> 200 20.12ms
+2026-06-24 22:12:49,825 INFO cropverse GET /notifications/ -> 200 20.50ms
+2026-06-24 22:12:49,871 INFO cropverse GET /notifications/ -> 200 25.12ms
+2026-06-24 22:12:50,896 INFO cropverse GET /assignments/me -> 200 15.35ms
+2026-06-24 22:12:50,919 INFO cropverse GET /assignments/me -> 200 16.17ms
+2026-06-24 22:12:55,212 INFO cropverse POST /auth/login -> 200 234.70ms
+2026-06-24 22:12:55,326 INFO cropverse GET /crops/ -> 200 34.41ms
+2026-06-24 22:12:55,328 INFO cropverse GET /prices/ -> 200 55.35ms
+2026-06-24 22:12:55,338 INFO cropverse GET /notifications/ -> 200 71.10ms
+2026-06-24 22:12:55,342 INFO cropverse GET /orders/ -> 200 50.16ms
+2026-06-24 22:12:55,343 INFO cropverse GET /shops/ -> 200 70.72ms
+2026-06-24 22:12:55,347 INFO cropverse GET /farmers/ -> 200 74.83ms
+2026-06-24 22:12:55,391 INFO cropverse GET /crops/ -> 200 58.44ms
+2026-06-24 22:12:55,403 INFO cropverse GET /prices/ -> 200 65.27ms
+2026-06-24 22:12:55,439 INFO cropverse GET /orders/ -> 200 80.25ms
+2026-06-24 22:12:55,449 INFO cropverse GET /notifications/ -> 200 98.27ms
+2026-06-24 22:12:55,451 INFO cropverse GET /farmers/ -> 200 87.95ms
+2026-06-24 22:12:55,457 INFO cropverse GET /shops/ -> 200 98.16ms
+2026-06-24 22:12:55,488 INFO cropverse GET /analytics/admin -> 200 82.74ms
+2026-06-24 22:12:55,510 INFO cropverse GET /analytics/admin -> 200 18.94ms
+2026-06-24 22:12:58,106 INFO cropverse GET /shops/ -> 200 21.27ms
+2026-06-24 22:12:58,140 INFO cropverse GET /shops/ -> 200 20.29ms
+2026-06-24 22:13:02,486 INFO cropverse GET /crops/ -> 200 9.86ms
+2026-06-24 22:13:02,493 INFO cropverse GET /farmers/ -> 200 19.40ms
+2026-06-24 22:13:02,519 INFO cropverse GET /crops/ -> 200 28.83ms
+2026-06-24 22:13:02,542 INFO cropverse GET /farmers/ -> 200 41.41ms
+2026-06-24 22:13:03,350 INFO cropverse GET /prices/ -> 200 24.44ms
+2026-06-24 22:13:03,359 INFO cropverse GET /crops/ -> 200 31.50ms
+2026-06-24 22:13:03,407 INFO cropverse GET /crops/ -> 200 34.07ms
+2026-06-24 22:13:03,418 INFO cropverse GET /prices/ -> 200 39.74ms
+2026-06-24 22:13:06,212 INFO cropverse GET /analytics/admin -> 200 29.27ms
+2026-06-24 22:13:06,302 INFO cropverse GET /analytics/admin -> 200 66.48ms
+2026-06-24 22:13:06,558 INFO cropverse GET /farmers/ -> 200 10.68ms
+2026-06-24 22:13:06,575 INFO cropverse GET /farmers/ -> 200 9.11ms
+2026-06-24 22:13:08,508 INFO cropverse GET /crops/ -> 200 27.45ms
+2026-06-24 22:13:08,521 INFO cropverse GET /farmers/ -> 200 50.85ms
+2026-06-24 22:13:08,523 INFO cropverse GET /shops/ -> 200 49.93ms
+2026-06-24 22:13:08,539 INFO cropverse GET /orders/ -> 200 58.41ms
+2026-06-24 22:13:08,572 INFO cropverse GET /crops/ -> 200 49.39ms
+2026-06-24 22:13:08,599 INFO cropverse GET /shops/ -> 200 63.37ms
+2026-06-24 22:13:08,618 INFO cropverse GET /farmers/ -> 200 76.84ms
+2026-06-24 22:13:08,623 INFO cropverse GET /orders/ -> 200 71.79ms
+2026-06-24 22:13:08,673 INFO cropverse GET /analytics/admin -> 200 89.81ms
+2026-06-24 22:13:08,707 INFO cropverse GET /analytics/admin -> 200 29.72ms
+2026-06-24 22:13:23,979 INFO cropverse POST /auth/login -> 200 231.56ms
+2026-06-24 22:13:24,062 INFO cropverse GET /prices/ -> 200 52.51ms
+2026-06-24 22:13:24,088 INFO cropverse GET /notifications/ -> 200 82.37ms
+2026-06-24 22:13:24,119 INFO cropverse GET /baby-crops/marketplace -> 200 107.41ms
+2026-06-24 22:13:24,130 INFO cropverse GET /orders/me -> 200 116.21ms
+2026-06-24 22:13:24,135 INFO cropverse GET /demand/me -> 200 121.52ms
+2026-06-24 22:13:24,139 INFO cropverse GET /prices/ -> 200 50.68ms
+2026-06-24 22:13:24,156 INFO cropverse GET /notifications/ -> 200 46.95ms
+2026-06-24 22:13:24,164 INFO cropverse GET /baby-crops/marketplace -> 200 38.06ms
+2026-06-24 22:13:24,175 INFO cropverse GET /orders/me -> 200 38.17ms
+2026-06-24 22:13:24,181 INFO cropverse GET /demand/me -> 200 41.14ms
+2026-06-24 22:13:27,170 INFO cropverse GET /baby-crops/marketplace -> 200 12.83ms
+2026-06-24 22:13:27,194 INFO cropverse GET /baby-crops/marketplace -> 200 20.80ms
+2026-06-24 22:13:33,867 INFO cropverse POST /orders/ -> 200 66.05ms
+2026-06-24 22:14:01,237 INFO cropverse POST /orders/ -> 200 80.30ms
+2026-06-24 22:14:05,209 INFO cropverse GET /orders/me -> 200 18.47ms
+2026-06-24 22:14:05,251 INFO cropverse GET /orders/me -> 200 33.49ms
+2026-06-24 22:14:14,785 INFO cropverse GET /baby-crops/marketplace -> 200 6.57ms
+2026-06-24 22:14:14,810 INFO cropverse GET /baby-crops/marketplace -> 200 17.20ms
+2026-06-24 22:14:20,647 INFO cropverse GET /orders/me -> 200 31.02ms
+2026-06-24 22:14:20,684 INFO cropverse GET /orders/me -> 200 27.15ms
+2026-06-24 22:14:45,288 INFO cropverse GET /baby-crops/marketplace -> 200 11.27ms
+2026-06-24 22:14:45,319 INFO cropverse GET /baby-crops/marketplace -> 200 24.88ms
+2026-06-24 22:14:46,666 INFO cropverse GET /baby-crops/marketplace -> 200 35.73ms
+2026-06-24 22:14:46,726 INFO cropverse GET /baby-crops/marketplace -> 200 46.07ms
+2026-06-24 22:14:46,731 INFO cropverse GET /demand/me -> 200 97.27ms
+2026-06-24 22:14:46,734 INFO cropverse GET /orders/me -> 200 88.79ms
+2026-06-24 22:14:46,787 INFO cropverse GET /demand/me -> 200 50.27ms
+2026-06-24 22:14:46,795 INFO cropverse GET /orders/me -> 200 51.13ms
+2026-06-24 22:14:50,992 INFO cropverse GET /crops/ -> 200 42.03ms
+2026-06-24 22:14:51,012 INFO cropverse GET /demand/me -> 200 61.69ms
+2026-06-24 22:14:51,019 INFO cropverse GET /crops/ -> 200 19.98ms
+2026-06-24 22:14:51,063 INFO cropverse GET /demand/me -> 200 38.15ms
+2026-06-24 22:14:54,743 INFO cropverse GET /baby-crops/marketplace -> 200 10.78ms
+2026-06-24 22:14:54,796 INFO cropverse GET /orders/me -> 200 62.08ms
+2026-06-24 22:14:54,810 INFO cropverse GET /demand/me -> 200 76.38ms
+2026-06-24 22:14:54,817 INFO cropverse GET /baby-crops/marketplace -> 200 62.99ms
+2026-06-24 22:14:54,852 INFO cropverse GET /orders/me -> 200 49.25ms
+2026-06-24 22:14:54,857 INFO cropverse GET /demand/me -> 200 29.04ms
+2026-06-24 22:15:23,832 INFO cropverse POST /auth/login -> 200 235.06ms
+2026-06-24 22:15:23,946 INFO cropverse GET /prices/ -> 200 82.23ms
+2026-06-24 22:15:23,957 INFO cropverse GET /notifications/ -> 200 99.66ms
+2026-06-24 22:15:23,967 INFO cropverse GET /crops/ -> 200 60.74ms
+2026-06-24 22:15:23,975 INFO cropverse GET /farmers/ -> 200 111.19ms
+2026-06-24 22:15:23,987 INFO cropverse GET /shops/ -> 200 81.15ms
+2026-06-24 22:15:23,994 INFO cropverse GET /orders/ -> 200 87.48ms
+2026-06-24 22:15:24,004 INFO cropverse GET /prices/ -> 200 47.15ms
+2026-06-24 22:15:24,022 INFO cropverse GET /crops/ -> 200 42.77ms
+2026-06-24 22:15:24,034 INFO cropverse GET /notifications/ -> 200 64.37ms
+2026-06-24 22:15:24,053 INFO cropverse GET /farmers/ -> 200 67.61ms
+2026-06-24 22:15:24,063 INFO cropverse GET /shops/ -> 200 66.65ms
+2026-06-24 22:15:24,073 INFO cropverse GET /orders/ -> 200 69.27ms
+2026-06-24 22:15:24,206 INFO cropverse GET /analytics/admin -> 200 22.89ms
+2026-06-24 22:15:24,251 INFO cropverse GET /analytics/admin -> 200 39.93ms
+2026-06-24 22:15:25,494 INFO cropverse GET /shops/ -> 200 8.73ms
+2026-06-24 22:15:25,513 INFO cropverse GET /shops/ -> 200 16.11ms
+2026-06-24 22:15:29,127 INFO cropverse GET /analytics/admin -> 200 27.68ms
+2026-06-24 22:15:29,213 INFO cropverse GET /analytics/admin -> 200 83.81ms
+2026-06-24 22:15:29,224 INFO cropverse GET /farmers/ -> 200 48.25ms
+2026-06-24 22:15:29,250 INFO cropverse GET /farmers/ -> 200 19.98ms
+2026-06-24 22:15:30,008 INFO cropverse GET /crops/ -> 200 34.19ms
+2026-06-24 22:15:30,009 INFO cropverse GET /prices/ -> 200 37.47ms
+2026-06-24 22:15:30,030 INFO cropverse GET /prices/ -> 200 17.03ms
+2026-06-24 22:15:30,032 INFO cropverse GET /crops/ -> 200 17.66ms
+2026-06-24 22:15:46,536 INFO cropverse GET /notifications/ -> 200 8.63ms
+2026-06-24 22:15:46,565 INFO cropverse GET /notifications/ -> 200 21.71ms
+2026-06-24 22:15:53,340 INFO cropverse GET /crops/ -> 200 46.37ms
+2026-06-24 22:15:53,345 INFO cropverse GET /farmers/ -> 200 58.86ms
+2026-06-24 22:15:53,358 INFO cropverse GET /shops/ -> 200 69.37ms
+2026-06-24 22:15:53,365 INFO cropverse GET /orders/ -> 200 69.09ms
+2026-06-24 22:15:53,393 INFO cropverse GET /crops/ -> 200 45.46ms
+2026-06-24 22:15:53,416 INFO cropverse GET /farmers/ -> 200 52.87ms
+2026-06-24 22:15:53,430 INFO cropverse GET /shops/ -> 200 63.61ms
+2026-06-24 22:15:53,437 INFO cropverse GET /orders/ -> 200 59.76ms
+2026-06-24 22:15:53,482 INFO cropverse GET /analytics/admin -> 200 74.36ms
+2026-06-24 22:15:53,532 INFO cropverse GET /analytics/admin -> 200 39.51ms
+2026-06-24 22:15:57,335 INFO cropverse GET /crops/ -> 200 15.82ms
+2026-06-24 22:15:57,350 INFO cropverse GET /farmers/ -> 200 37.03ms
+2026-06-24 22:15:57,390 INFO cropverse GET /crops/ -> 200 45.35ms
+2026-06-24 22:15:57,423 INFO cropverse GET /farmers/ -> 200 48.42ms
+2026-06-24 22:16:48,034 INFO cropverse POST /auth/login -> 401 231.74ms
+2026-06-24 22:16:51,950 INFO cropverse POST /auth/login -> 200 239.13ms
+2026-06-24 22:16:52,032 INFO cropverse GET /prices/ -> 200 59.01ms
+2026-06-24 22:16:52,037 INFO cropverse GET /baby-crops/marketplace -> 200 60.42ms
+2026-06-24 22:16:52,087 INFO cropverse GET /notifications/ -> 200 97.21ms
+2026-06-24 22:16:52,090 INFO cropverse GET /demand/me -> 200 114.53ms
+2026-06-24 22:16:52,095 INFO cropverse GET /orders/me -> 200 119.22ms
+2026-06-24 22:16:52,104 INFO cropverse GET /prices/ -> 200 50.50ms
+2026-06-24 22:16:52,108 INFO cropverse GET /baby-crops/marketplace -> 200 43.29ms
+2026-06-24 22:16:52,130 INFO cropverse GET /notifications/ -> 200 37.62ms
+2026-06-24 22:16:52,147 INFO cropverse GET /demand/me -> 200 49.28ms
+2026-06-24 22:16:52,155 INFO cropverse GET /orders/me -> 200 50.55ms
+2026-06-24 22:16:57,236 INFO cropverse GET /baby-crops/marketplace -> 200 8.19ms
+2026-06-24 22:16:57,251 INFO cropverse GET /baby-crops/marketplace -> 200 8.89ms
+2026-06-24 22:16:57,878 INFO cropverse GET /crops/ -> 200 6.00ms
+2026-06-24 22:16:57,907 INFO cropverse GET /crops/ -> 200 17.97ms
+2026-06-24 22:16:57,921 INFO cropverse GET /demand/me -> 200 48.94ms
+2026-06-24 22:16:57,971 INFO cropverse GET /demand/me -> 200 39.70ms
+2026-06-24 22:17:00,819 INFO cropverse GET /orders/me -> 200 16.48ms
+2026-06-24 22:17:00,864 INFO cropverse GET /orders/me -> 200 38.12ms
+2026-06-24 22:17:16,283 INFO cropverse POST /auth/login -> 401 10.34ms
+2026-06-24 22:17:22,344 INFO cropverse POST /auth/login -> 401 7.31ms
+2026-06-24 22:17:33,950 INFO cropverse POST /auth/login -> 200 237.68ms
+2026-06-24 22:17:33,998 INFO cropverse GET /prices/ -> 200 23.41ms
+2026-06-24 22:17:34,002 INFO cropverse GET /notifications/ -> 200 30.63ms
+2026-06-24 22:17:34,041 INFO cropverse GET /assignments/me -> 200 66.44ms
+2026-06-24 22:17:34,063 INFO cropverse GET /prices/ -> 200 48.87ms
+2026-06-24 22:17:34,093 INFO cropverse GET /notifications/ -> 200 59.51ms
+2026-06-24 22:17:34,123 INFO cropverse GET /assignments/me -> 200 70.25ms
+2026-06-24 22:17:40,311 INFO cropverse GET /baby-crops/ -> 200 10.50ms
+2026-06-24 22:17:40,337 INFO cropverse GET /baby-crops/ -> 200 19.40ms
+2026-06-24 22:17:42,405 INFO cropverse GET /notifications/ -> 200 6.65ms
+2026-06-24 22:17:42,453 INFO cropverse GET /notifications/ -> 200 38.29ms
+2026-06-24 22:17:43,292 INFO cropverse GET /assignments/me -> 200 15.22ms
+2026-06-24 22:17:43,309 INFO cropverse GET /assignments/me -> 200 12.92ms
+2026-06-24 22:22:04,579 INFO cropverse POST /auth/login -> 200 236.04ms
+2026-06-24 22:22:04,680 INFO cropverse GET /crops/ -> 200 58.37ms
+2026-06-24 22:22:04,689 INFO cropverse GET /prices/ -> 200 67.89ms
+2026-06-24 22:22:04,692 INFO cropverse GET /notifications/ -> 200 79.30ms
+2026-06-24 22:22:04,705 INFO cropverse GET /farmers/ -> 200 84.10ms
+2026-06-24 22:22:04,708 INFO cropverse GET /orders/ -> 200 78.50ms
+2026-06-24 22:22:04,710 INFO cropverse GET /shops/ -> 200 81.62ms
+2026-06-24 22:22:04,733 INFO cropverse GET /crops/ -> 200 38.02ms
+2026-06-24 22:22:04,737 INFO cropverse GET /prices/ -> 200 37.42ms
+2026-06-24 22:22:04,751 INFO cropverse GET /notifications/ -> 200 48.52ms
+2026-06-24 22:22:04,765 INFO cropverse GET /orders/ -> 200 48.87ms
+2026-06-24 22:22:04,777 INFO cropverse GET /farmers/ -> 200 61.86ms
+2026-06-24 22:22:04,779 INFO cropverse GET /shops/ -> 200 59.51ms
+2026-06-24 22:22:04,830 INFO cropverse GET /analytics/admin -> 200 59.25ms
+2026-06-24 22:22:04,863 INFO cropverse GET /analytics/admin -> 200 25.80ms
+2026-06-24 22:22:06,464 INFO cropverse GET /crops/ -> 200 13.31ms
+2026-06-24 22:22:06,483 INFO cropverse GET /farmers/ -> 200 37.19ms
+2026-06-24 22:22:06,503 INFO cropverse GET /crops/ -> 200 32.86ms
+2026-06-24 22:22:06,520 INFO cropverse GET /farmers/ -> 200 22.10ms
+2026-06-24 22:22:51,631 INFO cropverse GET /crops/ -> 200 49.90ms
+2026-06-24 22:22:51,654 INFO cropverse GET /farmers/ -> 200 82.23ms
+2026-06-24 22:22:51,700 INFO cropverse GET /shops/ -> 200 119.39ms
+2026-06-24 22:22:51,728 INFO cropverse GET /orders/ -> 200 139.80ms
+2026-06-24 22:22:51,746 INFO cropverse GET /crops/ -> 200 64.58ms
+2026-06-24 22:22:51,775 INFO cropverse GET /farmers/ -> 200 87.47ms
+2026-06-24 22:22:51,789 INFO cropverse GET /shops/ -> 200 68.32ms
+2026-06-24 22:22:51,825 INFO cropverse GET /orders/ -> 200 88.93ms
+2026-06-24 22:22:51,896 INFO cropverse GET /analytics/admin -> 200 88.11ms
+2026-06-24 22:22:51,965 INFO cropverse GET /analytics/admin -> 200 61.35ms
+2026-06-24 22:23:46,856 INFO cropverse POST /auth/login -> 200 233.48ms
+2026-06-24 22:23:46,944 INFO cropverse GET /prices/ -> 200 52.97ms
+2026-06-24 22:23:46,949 INFO cropverse GET /baby-crops/marketplace -> 200 47.10ms
+2026-06-24 22:23:46,982 INFO cropverse GET /notifications/ -> 200 94.92ms
+2026-06-24 22:23:47,003 INFO cropverse GET /prices/ -> 200 47.36ms
+2026-06-24 22:23:47,008 INFO cropverse GET /demand/me -> 200 98.99ms
+2026-06-24 22:23:47,012 INFO cropverse GET /baby-crops/marketplace -> 200 38.89ms
+2026-06-24 22:23:47,013 INFO cropverse GET /orders/me -> 200 104.77ms
+2026-06-24 22:23:47,028 INFO cropverse GET /notifications/ -> 200 36.05ms
+2026-06-24 22:23:47,042 INFO cropverse GET /demand/me -> 200 24.78ms
+2026-06-24 22:23:47,047 INFO cropverse GET /orders/me -> 200 24.33ms
+2026-06-24 22:23:48,351 INFO cropverse GET /orders/me -> 200 31.60ms
+2026-06-24 22:23:48,416 INFO cropverse GET /orders/me -> 200 50.82ms
+2026-06-24 22:23:49,242 INFO cropverse GET /crops/ -> 200 10.95ms
+2026-06-24 22:23:49,285 INFO cropverse GET /demand/me -> 200 52.76ms
+2026-06-24 22:23:49,295 INFO cropverse GET /crops/ -> 200 46.62ms
+2026-06-24 22:23:49,330 INFO cropverse GET /demand/me -> 200 30.04ms
+2026-06-24 22:24:50,845 INFO cropverse GET /baby-crops/marketplace -> 200 12.84ms
+2026-06-24 22:24:50,876 INFO cropverse GET /baby-crops/marketplace -> 200 9.15ms
+2026-06-24 22:25:03,376 INFO cropverse POST /auth/login -> 200 233.00ms
+2026-06-24 22:25:03,458 INFO cropverse GET /prices/ -> 200 57.95ms
+2026-06-24 22:25:03,467 INFO cropverse GET /crops/ -> 200 60.06ms
+2026-06-24 22:25:03,474 INFO cropverse GET /notifications/ -> 200 79.07ms
+2026-06-24 22:25:03,482 INFO cropverse GET /orders/ -> 200 74.97ms
+2026-06-24 22:25:03,498 INFO cropverse GET /shops/ -> 200 91.19ms
+2026-06-24 22:25:03,499 INFO cropverse GET /farmers/ -> 200 98.69ms
+2026-06-24 22:25:03,519 INFO cropverse GET /prices/ -> 200 50.75ms
+2026-06-24 22:25:03,532 INFO cropverse GET /crops/ -> 200 57.88ms
+2026-06-24 22:25:03,564 INFO cropverse GET /notifications/ -> 200 78.83ms
+2026-06-24 22:25:03,578 INFO cropverse GET /orders/ -> 200 75.28ms
+2026-06-24 22:25:03,588 INFO cropverse GET /shops/ -> 200 79.50ms
+2026-06-24 22:25:03,604 INFO cropverse GET /farmers/ -> 200 96.08ms
+2026-06-24 22:25:03,649 INFO cropverse GET /analytics/admin -> 200 103.73ms
+2026-06-24 22:25:03,681 INFO cropverse GET /analytics/admin -> 200 24.18ms
+2026-06-24 22:25:04,918 INFO cropverse GET /crops/ -> 200 12.75ms
+2026-06-24 22:25:04,926 INFO cropverse GET /prices/ -> 200 21.35ms
+2026-06-24 22:25:04,968 INFO cropverse GET /prices/ -> 200 34.38ms
+2026-06-24 22:25:04,976 INFO cropverse GET /crops/ -> 200 51.38ms
+2026-06-24 22:25:18,697 INFO cropverse POST /prices/ -> 200 35.90ms
+2026-06-24 22:25:18,716 INFO cropverse POST /prices/ -> 200 17.70ms
+2026-06-24 22:25:18,732 INFO cropverse GET /prices/ -> 200 13.22ms
+2026-06-24 22:25:18,733 INFO cropverse GET /crops/ -> 200 12.14ms
+2026-06-24 22:25:18,749 INFO cropverse GET /prices/ -> 200 21.48ms
+2026-06-24 22:25:18,759 INFO cropverse GET /crops/ -> 200 19.19ms
+2026-06-24 22:25:25,310 INFO cropverse DELETE /prices/a6196196-9d7d-43ba-8a4b-53d1d54148c0 -> 200 34.12ms
+2026-06-24 22:25:25,320 INFO cropverse GET /prices/ -> 200 4.98ms
+2026-06-24 22:25:25,321 INFO cropverse GET /crops/ -> 200 4.91ms
+2026-06-24 22:25:26,113 INFO cropverse DELETE /prices/acd2efba-a776-4b72-9ff0-801385d165f0 -> 200 14.31ms
+2026-06-24 22:25:26,123 INFO cropverse GET /prices/ -> 200 6.44ms
+2026-06-24 22:25:26,125 INFO cropverse GET /crops/ -> 200 7.52ms
+2026-06-24 22:25:56,154 INFO cropverse GET /notifications/ -> 200 18.07ms
+2026-06-24 22:25:56,233 INFO cropverse GET /notifications/ -> 200 37.51ms
+2026-06-24 22:37:33,149 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:37:43,337 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:37:56,315 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:38:09,393 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:38:19,623 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:38:31,055 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:38:41,438 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:54:00,764 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:54:29,674 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:55:34,616 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:56:51,527 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 22:57:28,724 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 23:06:44,275 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 23:06:44,544 INFO cropverse POST /ai/recommend-crop -> 401 28.74ms
+2026-06-24 23:06:44,645 INFO cropverse POST /auth/login -> 401 75.02ms
+2026-06-24 23:06:44,681 INFO cropverse POST /auth/register/admin -> 422 10.28ms
+2026-06-24 23:06:44,994 INFO cropverse POST /auth/register/admin -> 201 293.75ms
+2026-06-24 23:06:45,235 INFO cropverse POST /auth/register/farmer -> 201 239.55ms
+2026-06-24 23:06:45,477 INFO cropverse POST /auth/register/shop -> 201 239.27ms
+2026-06-24 23:06:45,719 INFO cropverse POST /auth/register/shop -> 201 240.68ms
+2026-06-24 23:06:45,743 INFO cropverse POST /crops/ -> 201 20.36ms
+2026-06-24 23:06:45,757 INFO cropverse GET /farmers/me -> 200 10.28ms
+2026-06-24 23:06:45,789 INFO cropverse POST /assignments/ -> 201 30.27ms
+2026-06-24 23:06:45,800 INFO cropverse POST /baby-crops/ -> 400 9.37ms
+2026-06-24 23:06:45,844 INFO cropverse PUT /assignments/6cd273c9-34b1-453b-9d56-c0d16fa0f68e/status -> 200 41.65ms
+2026-06-24 23:06:45,911 INFO cropverse POST /baby-crops/ -> 200 65.35ms
+2026-06-24 23:06:45,931 INFO cropverse GET /baby-crops/marketplace -> 200 18.87ms
+2026-06-24 23:06:45,943 INFO cropverse PUT /baby-crops/b0c7e6c2-98ce-4d3b-acf5-52a487b4e702/stage -> 400 8.49ms
+2026-06-24 23:06:45,951 INFO cropverse POST /orders/ -> 400 7.14ms
+2026-06-24 23:06:46,010 INFO cropverse POST /orders/ -> 200 57.19ms
+2026-06-24 23:06:46,017 INFO cropverse GET /orders/3ed14ef1-5478-4663-a8b8-04f09b3997f5 -> 403 5.20ms
+2026-06-24 23:06:46,063 INFO cropverse POST /demand/ -> 200 43.86ms
+2026-06-24 23:06:46,074 INFO cropverse GET /demand/6835e378-fc29-4ac2-808b-98a433820f33 -> 403 8.94ms
+2026-06-24 23:06:46,080 INFO cropverse PUT /demand/6835e378-fc29-4ac2-808b-98a433820f33 -> 403 5.04ms
+2026-06-24 23:06:46,147 INFO cropverse GET / -> 200 14.24ms
+2026-06-24 23:06:46,173 INFO cropverse GET /health/db -> 200 4.85ms
+2026-06-24 23:06:46,212 INFO cropverse GET /reports/farmers -> 401 16.16ms
+2026-06-24 23:06:46,258 INFO cropverse POST /upload/image -> 401 23.77ms
+2026-06-24 23:13:40,512 INFO cropverse GET /notifications/ -> 200 211.01ms
+2026-06-24 23:18:52,665 INFO cropverse GET /crops/ -> 200 65.79ms
+2026-06-24 23:18:52,682 INFO cropverse GET /crops/ -> 200 9.70ms
+2026-06-24 23:18:55,927 INFO cropverse GET /farmers/ -> 200 60.88ms
+2026-06-24 23:18:55,996 INFO cropverse GET /farmers/ -> 200 63.13ms
+2026-06-24 23:18:57,386 INFO cropverse GET /shops/ -> 200 19.61ms
+2026-06-24 23:18:57,415 INFO cropverse GET /shops/ -> 200 24.06ms
+2026-06-24 23:18:58,378 INFO cropverse GET /crops/ -> 200 3.22ms
+2026-06-24 23:18:58,388 INFO cropverse GET /crops/ -> 200 6.21ms
+2026-06-24 23:19:12,072 INFO cropverse GET /farmers/ -> 200 45.12ms
+2026-06-24 23:19:12,095 INFO cropverse GET /crops/ -> 200 65.40ms
+2026-06-24 23:19:12,159 INFO cropverse GET /crops/ -> 200 52.46ms
+2026-06-24 23:19:12,175 INFO cropverse GET /farmers/ -> 200 92.98ms
+2026-06-24 23:19:13,811 INFO cropverse GET /crops/ -> 200 4.63ms
+2026-06-24 23:19:13,840 INFO cropverse GET /crops/ -> 200 20.64ms
+2026-06-24 23:19:19,936 INFO cropverse GET /crops/ -> 200 40.13ms
+2026-06-24 23:19:19,952 INFO cropverse GET /prices/ -> 200 51.98ms
+2026-06-24 23:19:19,973 INFO cropverse GET /crops/ -> 200 16.74ms
+2026-06-24 23:19:19,978 INFO cropverse GET /prices/ -> 200 15.95ms
+2026-06-24 23:19:26,040 INFO cropverse GET /analytics/admin -> 200 103.64ms
+2026-06-24 23:19:26,118 INFO cropverse GET /analytics/admin -> 200 65.09ms
+2026-06-24 23:19:26,130 INFO cropverse GET /farmers/ -> 200 52.53ms
+2026-06-24 23:19:26,155 INFO cropverse GET /farmers/ -> 200 15.68ms
+2026-06-24 23:20:02,321 INFO cropverse GET /notifications/ -> 200 20.75ms
+2026-06-24 23:20:02,347 INFO cropverse GET /notifications/ -> 200 12.62ms
+2026-06-24 23:20:10,317 WARNING cropverse Gemini request failed: HTTPError
+2026-06-24 23:20:10,319 INFO cropverse POST /chatbot/chat -> 200 2586.23ms
+2026-06-24 23:20:41,251 WARNING cropverse Gemini request failed: HTTPError
+2026-06-24 23:20:41,252 INFO cropverse POST /chatbot/chat -> 200 1683.57ms
+2026-06-24 23:20:49,743 INFO cropverse GET /crops/ -> 200 105.28ms
+2026-06-24 23:20:49,770 INFO cropverse GET /shops/ -> 200 131.28ms
+2026-06-24 23:20:49,776 INFO cropverse GET /orders/ -> 200 65.84ms
+2026-06-24 23:20:49,787 INFO cropverse GET /farmers/ -> 200 148.61ms
+2026-06-24 23:20:49,807 INFO cropverse GET /crops/ -> 200 52.98ms
+2026-06-24 23:20:49,839 INFO cropverse GET /shops/ -> 200 58.27ms
+2026-06-24 23:20:49,850 INFO cropverse GET /farmers/ -> 200 48.42ms
+2026-06-24 23:20:49,852 INFO cropverse GET /orders/ -> 200 60.07ms
+2026-06-24 23:20:50,025 INFO cropverse GET /analytics/admin -> 200 148.56ms
+2026-06-24 23:20:50,071 INFO cropverse GET /analytics/admin -> 200 37.06ms
+2026-06-24 23:21:03,610 INFO cropverse POST /auth/login -> 200 287.96ms
+2026-06-24 23:21:03,700 INFO cropverse GET /prices/ -> 200 52.92ms
+2026-06-24 23:21:03,710 INFO cropverse GET /crops/ -> 200 58.28ms
+2026-06-24 23:21:03,725 INFO cropverse GET /notifications/ -> 200 83.30ms
+2026-06-24 23:21:03,745 INFO cropverse GET /orders/ -> 200 93.01ms
+2026-06-24 23:21:03,752 INFO cropverse GET /shops/ -> 200 100.80ms
+2026-06-24 23:21:03,754 INFO cropverse GET /farmers/ -> 200 106.36ms
+2026-06-24 23:21:03,771 INFO cropverse GET /prices/ -> 200 52.80ms
+2026-06-24 23:21:03,779 INFO cropverse GET /crops/ -> 200 54.88ms
+2026-06-24 23:21:03,822 INFO cropverse GET /notifications/ -> 200 77.56ms
+2026-06-24 23:21:03,842 INFO cropverse GET /orders/ -> 200 84.09ms
+2026-06-24 23:21:03,856 INFO cropverse GET /shops/ -> 200 92.13ms
+2026-06-24 23:21:03,859 INFO cropverse GET /farmers/ -> 200 95.24ms
+2026-06-24 23:21:03,899 INFO cropverse GET /analytics/admin -> 200 103.51ms
+2026-06-24 23:21:03,926 INFO cropverse GET /analytics/admin -> 200 22.12ms
+2026-06-24 23:21:13,476 INFO cropverse POST /auth/login -> 200 234.26ms
+2026-06-24 23:21:13,570 INFO cropverse GET /prices/ -> 200 53.51ms
+2026-06-24 23:21:13,580 INFO cropverse GET /notifications/ -> 200 68.03ms
+2026-06-24 23:21:13,626 INFO cropverse GET /assignments/me -> 200 110.70ms
+2026-06-24 23:21:13,633 INFO cropverse GET /prices/ -> 200 56.77ms
+2026-06-24 23:21:13,650 INFO cropverse GET /notifications/ -> 200 31.85ms
+2026-06-24 23:21:13,669 INFO cropverse GET /assignments/me -> 200 33.02ms
+2026-06-24 23:21:16,307 INFO cropverse GET /assignments/me -> 200 56.95ms
+2026-06-24 23:21:16,332 INFO cropverse GET /baby-crops/ -> 200 79.40ms
+2026-06-24 23:21:16,372 INFO cropverse GET /assignments/me -> 200 49.91ms
+2026-06-24 23:21:16,380 INFO cropverse GET /baby-crops/ -> 200 38.18ms
+2026-06-24 23:21:42,467 INFO cropverse GET /orders/me -> 200 28.50ms
+2026-06-24 23:21:42,517 INFO cropverse GET /orders/me -> 200 40.19ms
+2026-06-24 23:21:51,448 INFO cropverse POST /auth/login -> 200 237.72ms
+2026-06-24 23:21:51,526 INFO cropverse GET /prices/ -> 200 48.67ms
+2026-06-24 23:21:51,554 INFO cropverse GET /notifications/ -> 200 80.43ms
+2026-06-24 23:21:51,556 INFO cropverse GET /crops/ -> 200 57.18ms
+2026-06-24 23:21:51,580 INFO cropverse GET /shops/ -> 200 93.82ms
+2026-06-24 23:21:51,582 INFO cropverse GET /orders/ -> 200 82.32ms
+2026-06-24 23:21:51,587 INFO cropverse GET /farmers/ -> 200 100.63ms
+2026-06-24 23:21:51,603 INFO cropverse GET /prices/ -> 200 54.63ms
+2026-06-24 23:21:51,620 INFO cropverse GET /crops/ -> 200 48.68ms
+2026-06-24 23:21:51,669 INFO cropverse GET /notifications/ -> 200 97.13ms
+2026-06-24 23:21:51,683 INFO cropverse GET /orders/ -> 200 95.60ms
+2026-06-24 23:21:51,695 INFO cropverse GET /shops/ -> 200 106.48ms
+2026-06-24 23:21:51,702 INFO cropverse GET /farmers/ -> 200 101.04ms
+2026-06-24 23:21:51,731 INFO cropverse GET /analytics/admin -> 200 91.63ms
+2026-06-24 23:21:51,758 INFO cropverse GET /analytics/admin -> 200 23.67ms
+2026-06-24 23:21:54,168 INFO cropverse GET /shops/ -> 200 28.56ms
+2026-06-24 23:21:54,225 INFO cropverse GET /shops/ -> 200 43.33ms
+2026-06-24 23:21:57,883 INFO cropverse GET /notifications/ -> 200 14.34ms
+2026-06-24 23:21:57,924 INFO cropverse GET /notifications/ -> 200 33.30ms
+2026-06-24 23:21:58,820 INFO cropverse GET /prices/ -> 200 34.58ms
+2026-06-24 23:21:58,847 INFO cropverse GET /crops/ -> 200 58.79ms
+2026-06-24 23:21:58,881 INFO cropverse GET /prices/ -> 200 28.60ms
+2026-06-24 23:21:58,885 INFO cropverse GET /crops/ -> 200 22.58ms
+2026-06-24 23:22:01,026 INFO cropverse GET /crops/ -> 200 7.72ms
+2026-06-24 23:22:01,030 INFO cropverse GET /farmers/ -> 200 13.05ms
+2026-06-24 23:22:01,041 INFO cropverse GET /crops/ -> 200 10.06ms
+2026-06-24 23:22:01,048 INFO cropverse GET /farmers/ -> 200 15.26ms
+2026-06-24 23:22:02,081 INFO cropverse GET /crops/ -> 200 3.60ms
+2026-06-24 23:22:02,097 INFO cropverse GET /crops/ -> 200 12.75ms
+2026-06-24 23:22:04,048 INFO cropverse GET /crops/ -> 200 11.07ms
+2026-06-24 23:22:04,062 INFO cropverse GET /farmers/ -> 200 26.75ms
+2026-06-24 23:22:04,106 INFO cropverse GET /crops/ -> 200 51.38ms
+2026-06-24 23:22:04,185 INFO cropverse GET /farmers/ -> 200 111.56ms
+2026-06-24 23:22:05,744 INFO cropverse GET /shops/ -> 200 10.76ms
+2026-06-24 23:22:05,764 INFO cropverse GET /shops/ -> 200 15.33ms
+2026-06-24 23:22:08,229 INFO cropverse GET /farmers/ -> 200 8.24ms
+2026-06-24 23:22:08,245 INFO cropverse GET /farmers/ -> 200 11.46ms
+2026-06-24 23:22:09,062 INFO cropverse GET /crops/ -> 200 21.82ms
+2026-06-24 23:22:09,078 INFO cropverse GET /farmers/ -> 200 44.67ms
+2026-06-24 23:22:09,081 INFO cropverse GET /shops/ -> 200 45.88ms
+2026-06-24 23:22:09,100 INFO cropverse GET /orders/ -> 200 59.07ms
+2026-06-24 23:22:09,152 INFO cropverse GET /crops/ -> 200 74.21ms
+2026-06-24 23:22:09,199 INFO cropverse GET /farmers/ -> 200 104.53ms
+2026-06-24 23:22:09,212 INFO cropverse GET /shops/ -> 200 106.67ms
+2026-06-24 23:22:09,220 INFO cropverse GET /orders/ -> 200 103.16ms
+2026-06-24 23:22:09,254 INFO cropverse GET /analytics/admin -> 200 75.39ms
+2026-06-24 23:22:09,300 INFO cropverse GET /analytics/admin -> 200 39.21ms
+2026-06-24 23:22:16,146 INFO cropverse POST /auth/login -> 200 231.05ms
+2026-06-24 23:22:16,203 INFO cropverse GET /prices/ -> 200 27.20ms
+2026-06-24 23:22:16,210 INFO cropverse GET /notifications/ -> 200 36.37ms
+2026-06-24 23:22:16,250 INFO cropverse GET /assignments/me -> 200 73.23ms
+2026-06-24 23:22:16,264 INFO cropverse GET /prices/ -> 200 51.15ms
+2026-06-24 23:22:16,287 INFO cropverse GET /notifications/ -> 200 66.66ms
+2026-06-24 23:22:16,302 INFO cropverse GET /assignments/me -> 200 43.12ms
+2026-06-24 23:22:19,349 INFO cropverse GET /orders/me -> 200 16.26ms
+2026-06-24 23:22:19,392 INFO cropverse GET /orders/me -> 200 35.43ms
+2026-06-24 23:22:22,978 INFO cropverse GET /notifications/ -> 200 15.15ms
+2026-06-24 23:22:23,004 INFO cropverse GET /notifications/ -> 200 19.64ms
+2026-06-24 23:22:23,676 INFO cropverse GET /orders/me -> 200 25.50ms
+2026-06-24 23:22:23,716 INFO cropverse GET /orders/me -> 200 35.91ms
+2026-06-24 23:22:30,046 INFO cropverse POST /auth/login -> 200 230.49ms
+2026-06-24 23:22:30,161 INFO cropverse GET /prices/ -> 200 75.71ms
+2026-06-24 23:22:30,175 INFO cropverse GET /baby-crops/marketplace -> 200 74.15ms
+2026-06-24 23:22:30,194 INFO cropverse GET /notifications/ -> 200 112.11ms
+2026-06-24 23:22:30,213 INFO cropverse GET /orders/me -> 200 126.40ms
+2026-06-24 23:22:30,216 INFO cropverse GET /demand/me -> 200 121.33ms
+2026-06-24 23:22:30,227 INFO cropverse GET /prices/ -> 200 55.76ms
+2026-06-24 23:22:30,237 INFO cropverse GET /baby-crops/marketplace -> 200 34.61ms
+2026-06-24 23:22:30,249 INFO cropverse GET /notifications/ -> 200 40.97ms
+2026-06-24 23:22:30,284 INFO cropverse GET /orders/me -> 200 67.06ms
+2026-06-24 23:22:30,294 INFO cropverse GET /demand/me -> 200 71.08ms
+2026-06-24 23:22:31,654 INFO cropverse GET /baby-crops/marketplace -> 200 13.80ms
+2026-06-24 23:22:31,696 INFO cropverse GET /baby-crops/marketplace -> 200 34.90ms
+2026-06-24 23:22:33,603 INFO cropverse GET /crops/ -> 200 40.21ms
+2026-06-24 23:22:33,646 INFO cropverse GET /demand/me -> 200 83.82ms
+2026-06-24 23:22:33,660 INFO cropverse GET /crops/ -> 200 49.89ms
+2026-06-24 23:22:33,710 INFO cropverse GET /demand/me -> 200 58.56ms
+2026-06-24 23:22:35,433 INFO cropverse GET /orders/me -> 200 19.42ms
+2026-06-24 23:22:35,477 INFO cropverse GET /orders/me -> 200 36.40ms
+2026-06-24 23:22:38,579 INFO cropverse GET /notifications/ -> 200 13.62ms
+2026-06-24 23:22:38,646 INFO cropverse GET /notifications/ -> 200 55.42ms
+2026-06-24 23:22:48,036 WARNING cropverse Gemini request failed: HTTPError
+2026-06-24 23:22:48,039 INFO cropverse POST /chatbot/chat -> 200 4735.67ms
+2026-06-24 23:22:56,137 INFO cropverse GET /baby-crops/marketplace -> 200 5.81ms
+2026-06-24 23:22:56,151 INFO cropverse GET /baby-crops/marketplace -> 200 10.30ms
+2026-06-24 23:22:57,026 INFO cropverse GET /crops/ -> 200 32.28ms
+2026-06-24 23:22:57,094 INFO cropverse GET /crops/ -> 200 54.51ms
+2026-06-24 23:22:57,095 INFO cropverse GET /demand/me -> 200 97.95ms
+2026-06-24 23:22:57,129 INFO cropverse GET /demand/me -> 200 27.80ms
+2026-06-24 23:23:02,879 INFO cropverse GET /baby-crops/marketplace -> 200 26.06ms
+2026-06-24 23:23:02,932 INFO cropverse GET /demand/me -> 200 76.35ms
+2026-06-24 23:23:02,945 INFO cropverse GET /orders/me -> 200 85.37ms
+2026-06-24 23:23:02,949 INFO cropverse GET /baby-crops/marketplace -> 200 51.82ms
+2026-06-24 23:23:02,995 INFO cropverse GET /demand/me -> 200 47.06ms
+2026-06-24 23:23:02,999 INFO cropverse GET /orders/me -> 200 37.43ms
+2026-06-24 23:23:08,505 INFO cropverse POST /auth/login -> 200 240.29ms
+2026-06-24 23:23:08,572 INFO cropverse GET /prices/ -> 200 41.17ms
+2026-06-24 23:23:08,577 INFO cropverse GET /crops/ -> 200 36.41ms
+2026-06-24 23:23:08,579 INFO cropverse GET /notifications/ -> 200 53.54ms
+2026-06-24 23:23:08,601 INFO cropverse GET /farmers/ -> 200 70.58ms
+2026-06-24 23:23:08,611 INFO cropverse GET /shops/ -> 200 76.48ms
+2026-06-24 23:23:08,628 INFO cropverse GET /orders/ -> 200 84.43ms
+2026-06-24 23:23:08,652 INFO cropverse GET /prices/ -> 200 69.84ms
+2026-06-24 23:23:08,659 INFO cropverse GET /crops/ -> 200 68.95ms
+2026-06-24 23:23:08,682 INFO cropverse GET /notifications/ -> 200 87.02ms
+2026-06-24 23:23:08,698 INFO cropverse GET /farmers/ -> 200 78.85ms
+2026-06-24 23:23:08,705 INFO cropverse GET /shops/ -> 200 70.63ms
+2026-06-24 23:23:08,709 INFO cropverse GET /orders/ -> 200 66.48ms
+2026-06-24 23:23:08,734 INFO cropverse GET /analytics/admin -> 200 58.42ms
+2026-06-24 23:23:08,777 INFO cropverse GET /analytics/admin -> 200 37.90ms
+2026-06-24 23:23:10,788 INFO cropverse GET /notifications/ -> 200 29.19ms
+2026-06-24 23:23:10,809 INFO cropverse GET /notifications/ -> 200 15.13ms
+2026-06-24 23:23:12,678 INFO cropverse GET /farmers/ -> 200 33.87ms
+2026-06-24 23:23:12,749 INFO cropverse GET /farmers/ -> 200 57.63ms
+2026-06-24 23:23:13,554 INFO cropverse GET /shops/ -> 200 15.62ms
+2026-06-24 23:23:13,600 INFO cropverse GET /shops/ -> 200 39.81ms
+2026-06-24 23:23:15,027 INFO cropverse GET /crops/ -> 200 3.79ms
+2026-06-24 23:23:15,041 INFO cropverse GET /crops/ -> 200 9.55ms
+2026-06-24 23:23:16,448 INFO cropverse GET /crops/ -> 200 8.53ms
+2026-06-24 23:23:16,458 INFO cropverse GET /farmers/ -> 200 21.50ms
+2026-06-24 23:23:16,510 INFO cropverse GET /crops/ -> 200 50.56ms
+2026-06-24 23:23:16,552 INFO cropverse GET /farmers/ -> 200 89.25ms
+2026-06-24 23:23:19,928 INFO cropverse GET /crops/ -> 200 6.77ms
+2026-06-24 23:23:19,929 INFO cropverse GET /prices/ -> 200 8.77ms
+2026-06-24 23:23:19,940 INFO cropverse GET /crops/ -> 200 7.38ms
+2026-06-24 23:23:19,946 INFO cropverse GET /prices/ -> 200 12.10ms
+2026-06-24 23:23:25,852 INFO cropverse GET /crops/ -> 200 62.99ms
+2026-06-24 23:23:25,889 INFO cropverse GET /farmers/ -> 200 105.73ms
+2026-06-24 23:23:25,909 INFO cropverse GET /shops/ -> 200 119.06ms
+2026-06-24 23:23:25,930 INFO cropverse GET /orders/ -> 200 129.92ms
+2026-06-24 23:23:25,947 INFO cropverse GET /crops/ -> 200 62.38ms
+2026-06-24 23:23:25,966 INFO cropverse GET /farmers/ -> 200 61.64ms
+2026-06-24 23:23:26,012 INFO cropverse GET /shops/ -> 200 83.67ms
+2026-06-24 23:23:26,043 INFO cropverse GET /orders/ -> 200 103.38ms
+2026-06-24 23:23:26,093 INFO cropverse GET /analytics/admin -> 200 95.26ms
+2026-06-24 23:23:26,130 INFO cropverse GET /analytics/admin -> 200 33.61ms
+2026-06-24 23:24:31,893 INFO cropverse GET /crops/ -> 200 13.51ms
+2026-06-24 23:24:31,921 INFO cropverse GET /crops/ -> 200 23.46ms
+2026-06-24 23:24:32,002 INFO cropverse GET /farmers/ -> 200 124.13ms
+2026-06-24 23:24:32,023 INFO cropverse GET /farmers/ -> 200 15.03ms
+2026-06-24 23:24:33,110 INFO cropverse GET /crops/ -> 200 5.51ms
+2026-06-24 23:24:33,128 INFO cropverse GET /crops/ -> 200 10.88ms
+2026-06-24 23:24:35,753 INFO cropverse GET /shops/ -> 200 11.81ms
+2026-06-24 23:24:35,796 INFO cropverse GET /shops/ -> 200 37.56ms
+2026-06-24 23:25:18,987 INFO cropverse POST /auth/login -> 200 236.17ms
+2026-06-24 23:25:19,097 INFO cropverse GET /baby-crops/marketplace -> 200 68.60ms
+2026-06-24 23:25:19,099 INFO cropverse GET /prices/ -> 200 73.27ms
+2026-06-24 23:25:19,132 INFO cropverse GET /notifications/ -> 200 94.86ms
+2026-06-24 23:25:19,146 INFO cropverse GET /baby-crops/marketplace -> 200 36.54ms
+2026-06-24 23:25:19,151 INFO cropverse GET /prices/ -> 200 35.03ms
+2026-06-24 23:25:19,152 INFO cropverse GET /demand/me -> 200 119.03ms
+2026-06-24 23:25:19,157 INFO cropverse GET /orders/me -> 200 123.13ms
+2026-06-24 23:25:19,169 INFO cropverse GET /notifications/ -> 200 29.65ms
+2026-06-24 23:25:19,182 INFO cropverse GET /demand/me -> 200 24.13ms
+2026-06-24 23:25:19,188 INFO cropverse GET /orders/me -> 200 26.46ms
+2026-06-24 23:25:20,435 INFO cropverse GET /crops/ -> 200 14.41ms
+2026-06-24 23:25:20,454 INFO cropverse GET /demand/me -> 200 31.01ms
+2026-06-24 23:25:20,465 INFO cropverse GET /crops/ -> 200 23.46ms
+2026-06-24 23:25:20,513 INFO cropverse GET /demand/me -> 200 42.06ms
+2026-06-24 23:25:31,672 INFO cropverse POST /demand/ -> 200 88.33ms
+2026-06-24 23:25:31,690 INFO cropverse GET /crops/ -> 200 6.84ms
+2026-06-24 23:25:31,703 INFO cropverse GET /demand/me -> 200 18.31ms
+2026-06-24 23:25:31,724 INFO cropverse POST /demand/ -> 200 120.61ms
+2026-06-24 23:25:31,741 INFO cropverse GET /crops/ -> 200 5.72ms
+2026-06-24 23:25:31,753 INFO cropverse GET /demand/me -> 200 16.71ms
+2026-06-24 23:25:33,117 INFO cropverse GET /notifications/ -> 200 10.85ms
+2026-06-24 23:25:33,134 INFO cropverse GET /notifications/ -> 200 11.48ms
+2026-06-24 23:25:46,094 INFO cropverse PUT /notifications/20e954ff-8399-4a58-9ee9-f0aaf0375ff9/read -> 200 22.54ms
+2026-06-24 23:25:46,767 INFO cropverse PUT /notifications/3fcbe588-b760-44ad-b9e4-f6a4d5d3c694/read -> 200 17.04ms
+2026-06-24 23:25:49,944 INFO cropverse POST /auth/login -> 200 231.49ms
+2026-06-24 23:25:50,037 INFO cropverse GET /prices/ -> 200 63.22ms
+2026-06-24 23:25:50,047 INFO cropverse GET /crops/ -> 200 60.17ms
+2026-06-24 23:25:50,061 INFO cropverse GET /notifications/ -> 200 90.46ms
+2026-06-24 23:25:50,078 INFO cropverse GET /farmers/ -> 200 98.26ms
+2026-06-24 23:25:50,084 INFO cropverse GET /shops/ -> 200 104.77ms
+2026-06-24 23:25:50,097 INFO cropverse GET /orders/ -> 200 94.69ms
+2026-06-24 23:25:50,106 INFO cropverse GET /prices/ -> 200 56.09ms
+2026-06-24 23:25:50,115 INFO cropverse GET /crops/ -> 200 52.53ms
+2026-06-24 23:25:50,140 INFO cropverse GET /notifications/ -> 200 66.06ms
+2026-06-24 23:25:50,170 INFO cropverse GET /farmers/ -> 200 84.71ms
+2026-06-24 23:25:50,198 INFO cropverse GET /shops/ -> 200 106.52ms
+2026-06-24 23:25:50,212 INFO cropverse GET /orders/ -> 200 108.54ms
+2026-06-24 23:25:50,243 INFO cropverse GET /analytics/admin -> 200 76.52ms
+2026-06-24 23:25:50,278 INFO cropverse GET /analytics/admin -> 200 27.76ms
+2026-06-24 23:25:51,510 INFO cropverse GET /notifications/ -> 200 13.16ms
+2026-06-24 23:25:51,535 INFO cropverse GET /notifications/ -> 200 21.58ms
+2026-06-24 23:25:55,550 INFO cropverse GET /crops/ -> 200 40.15ms
+2026-06-24 23:25:55,579 INFO cropverse GET /farmers/ -> 200 73.89ms
+2026-06-24 23:25:55,632 INFO cropverse GET /crops/ -> 200 62.91ms
+2026-06-24 23:25:55,648 INFO cropverse GET /farmers/ -> 200 53.30ms
+2026-06-24 23:25:57,450 INFO cropverse GET /crops/ -> 200 11.54ms
+2026-06-24 23:25:57,471 INFO cropverse GET /crops/ -> 200 15.58ms
+2026-06-24 23:26:00,480 INFO cropverse GET /farmers/ -> 200 17.80ms
+2026-06-24 23:26:00,507 INFO cropverse GET /farmers/ -> 200 21.89ms
+2026-06-24 23:26:01,323 INFO cropverse GET /shops/ -> 200 7.46ms
+2026-06-24 23:26:01,340 INFO cropverse GET /shops/ -> 200 12.17ms
+2026-06-24 23:26:02,387 INFO cropverse GET /crops/ -> 200 7.12ms
+2026-06-24 23:26:02,406 INFO cropverse GET /crops/ -> 200 10.24ms
+2026-06-24 23:26:12,014 INFO cropverse POST /auth/login -> 200 239.14ms
+2026-06-24 23:26:12,111 INFO cropverse GET /prices/ -> 200 50.98ms
+2026-06-24 23:26:12,133 INFO cropverse GET /notifications/ -> 200 79.21ms
+2026-06-24 23:26:12,159 INFO cropverse GET /assignments/me -> 200 93.75ms
+2026-06-24 23:26:12,181 INFO cropverse GET /prices/ -> 200 54.87ms
+2026-06-24 23:26:12,196 INFO cropverse GET /notifications/ -> 200 47.91ms
+2026-06-24 23:26:12,208 INFO cropverse GET /assignments/me -> 200 36.36ms
+2026-06-24 23:26:15,368 INFO cropverse GET /assignments/me -> 200 48.74ms
+2026-06-24 23:26:15,404 INFO cropverse GET /baby-crops/ -> 200 83.96ms
+2026-06-24 23:26:15,484 INFO cropverse GET /assignments/me -> 200 93.95ms
+2026-06-24 23:26:15,511 INFO cropverse GET /baby-crops/ -> 200 96.94ms
+2026-06-24 23:26:16,513 INFO cropverse GET /orders/me -> 200 15.37ms
+2026-06-24 23:26:16,561 INFO cropverse GET /orders/me -> 200 41.02ms
+2026-06-24 23:26:17,734 INFO cropverse GET /notifications/ -> 200 13.99ms
+2026-06-24 23:26:17,781 INFO cropverse GET /notifications/ -> 200 33.96ms
+2026-06-24 23:26:18,649 INFO cropverse GET /assignments/me -> 200 23.63ms
+2026-06-24 23:26:18,704 INFO cropverse GET /assignments/me -> 200 50.81ms
+2026-06-24 23:30:57,306 WARNING cropverse Gemini request failed: HTTPError
+2026-06-24 23:30:57,309 INFO cropverse POST /chatbot/chat -> 200 7622.81ms
+2026-06-24 23:31:38,390 WARNING cropverse Gemini request failed: HTTPError
+2026-06-24 23:31:38,392 INFO cropverse POST /chatbot/chat -> 200 6282.45ms
+2026-06-24 23:37:53,589 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 23:38:27,549 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 23:38:55,446 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 23:39:48,256 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 23:40:09,621 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 23:40:23,542 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 23:40:53,888 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-24 23:41:30,677 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-25 00:08:53,583 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-25 00:13:06,603 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-25 00:13:21,597 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-25 00:15:50,955 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-25 00:16:51,919 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-25 00:18:13,642 WARNING cropverse SlowAPI unavailable; rate limiting disabled: No module named 'slowapi'
+2026-06-25 00:18:14,004 INFO cropverse POST /ai/recommend-crop -> 401 3.00ms
+2026-06-25 00:18:14,423 INFO cropverse POST /auth/register/farmer -> 201 391.47ms
+2026-06-25 00:18:14,435 INFO cropverse POST /chatbot/chat -> 200 9.12ms
+2026-06-25 00:18:14,716 INFO cropverse POST /auth/register/farmer -> 201 251.05ms
+2026-06-25 00:18:14,725 INFO cropverse POST /chatbot/chat -> 200 4.25ms
+2026-06-25 00:18:14,773 INFO cropverse POST /auth/login -> 401 9.85ms
+2026-06-25 00:18:14,808 INFO cropverse POST /auth/register/admin -> 422 3.71ms
+2026-06-25 00:18:15,115 INFO cropverse POST /auth/register/admin -> 201 263.70ms
+2026-06-25 00:18:15,380 INFO cropverse POST /auth/register/farmer -> 201 259.50ms
+2026-06-25 00:18:15,681 INFO cropverse POST /auth/register/shop -> 201 296.81ms
+2026-06-25 00:18:15,988 INFO cropverse POST /auth/register/shop -> 201 303.45ms
+2026-06-25 00:18:16,037 INFO cropverse POST /crops/ -> 201 44.16ms
+2026-06-25 00:18:16,061 INFO cropverse GET /farmers/me -> 200 16.57ms
+2026-06-25 00:18:16,087 INFO cropverse Gemini request skipped: GEMINI_API_KEY is not configured
+2026-06-25 00:18:16,109 INFO cropverse POST /assignments/ -> 201 44.85ms
+2026-06-25 00:18:16,124 INFO cropverse POST /baby-crops/ -> 400 12.21ms
+2026-06-25 00:18:16,186 INFO cropverse PUT /assignments/98f2231c-c728-459e-9ccc-81521d738215/status -> 200 60.48ms
+2026-06-25 00:18:16,264 INFO cropverse POST /baby-crops/ -> 200 74.52ms
+2026-06-25 00:18:16,289 INFO cropverse GET /baby-crops/marketplace -> 200 22.17ms
+2026-06-25 00:18:16,301 INFO cropverse PUT /baby-crops/b54fc407-e801-4143-8f62-07ef65795c45/stage -> 400 9.38ms
+2026-06-25 00:18:16,312 INFO cropverse POST /orders/ -> 400 8.30ms
+2026-06-25 00:18:16,384 INFO cropverse POST /orders/ -> 200 70.63ms
+2026-06-25 00:18:16,392 INFO cropverse GET /orders/b3919baf-42bc-4515-aba0-fe64e32a0e31 -> 403 6.26ms
+2026-06-25 00:18:16,446 INFO cropverse POST /demand/ -> 200 51.95ms
+2026-06-25 00:18:16,456 INFO cropverse GET /demand/85d1d897-49da-4da8-9a3f-52579b089f1f -> 403 7.70ms
+2026-06-25 00:18:16,463 INFO cropverse PUT /demand/85d1d897-49da-4da8-9a3f-52579b089f1f -> 403 6.21ms
+2026-06-25 00:18:16,728 INFO cropverse POST /auth/register/admin -> 201 241.86ms
+2026-06-25 00:18:16,980 INFO cropverse POST /auth/register/farmer -> 201 250.64ms
+2026-06-25 00:18:17,277 INFO cropverse POST /auth/register/shop -> 201 292.49ms
+2026-06-25 00:18:17,520 INFO cropverse POST /auth/register/shop -> 201 241.71ms
+2026-06-25 00:18:17,540 INFO cropverse POST /crops/ -> 201 18.05ms
+2026-06-25 00:18:17,545 INFO cropverse GET /farmers/me -> 200 2.92ms
+2026-06-25 00:18:17,555 INFO cropverse Gemini request skipped: GEMINI_API_KEY is not configured
+2026-06-25 00:18:17,570 INFO cropverse POST /assignments/ -> 201 23.30ms
+2026-06-25 00:18:17,613 INFO cropverse PUT /assignments/a89a6e74-2d98-4551-a174-38cd86ca613b/status -> 200 41.94ms
+2026-06-25 00:18:17,677 INFO cropverse POST /baby-crops/ -> 200 62.25ms
+2026-06-25 00:18:17,700 INFO cropverse GET /baby-crops/marketplace -> 200 20.70ms
+2026-06-25 00:18:17,740 INFO cropverse POST /orders/ -> 200 38.69ms
+2026-06-25 00:18:17,749 INFO cropverse GET /orders/me -> 200 7.74ms
+2026-06-25 00:18:17,772 INFO cropverse PUT /orders/8d7e8913-dd5a-4e67-b16c-c73771e421fe/accept -> 200 20.43ms
+2026-06-25 00:18:17,794 INFO cropverse PUT /orders/8d7e8913-dd5a-4e67-b16c-c73771e421fe/dispatch -> 200 20.85ms
+2026-06-25 00:18:17,813 INFO cropverse PUT /orders/8d7e8913-dd5a-4e67-b16c-c73771e421fe/deliver -> 200 16.69ms
+2026-06-25 00:18:17,827 INFO cropverse GET /notifications/ -> 200 13.03ms
+2026-06-25 00:18:18,114 INFO cropverse POST /auth/register/admin -> 201 245.83ms
+2026-06-25 00:18:18,356 INFO cropverse POST /auth/register/farmer -> 201 239.33ms
+2026-06-25 00:18:18,595 INFO cropverse POST /auth/register/shop -> 201 237.20ms
+2026-06-25 00:18:18,836 INFO cropverse POST /auth/register/shop -> 201 239.35ms
+2026-06-25 00:18:18,860 INFO cropverse POST /crops/ -> 201 20.23ms
+2026-06-25 00:18:18,869 INFO cropverse GET /farmers/me -> 200 6.67ms
+2026-06-25 00:18:18,878 INFO cropverse Gemini request skipped: GEMINI_API_KEY is not configured
+2026-06-25 00:18:18,892 INFO cropverse POST /assignments/ -> 201 21.22ms
+2026-06-25 00:18:18,936 INFO cropverse PUT /assignments/a95bf055-e3a4-4b85-9181-6e32c268b627/status -> 200 41.90ms
+2026-06-25 00:18:19,003 INFO cropverse POST /baby-crops/ -> 200 65.15ms
+2026-06-25 00:18:19,022 INFO cropverse GET /baby-crops/marketplace -> 200 17.89ms
+2026-06-25 00:18:19,070 INFO cropverse POST /orders/ -> 200 45.08ms
+2026-06-25 00:18:19,095 INFO cropverse PUT /orders/2c6f6572-6d95-4910-919a-248b45a817f7/reject -> 200 23.53ms
+2026-06-25 00:18:19,358 INFO cropverse POST /auth/register/admin -> 201 240.86ms
+2026-06-25 00:18:19,600 INFO cropverse POST /auth/register/farmer -> 201 239.41ms
+2026-06-25 00:18:19,838 INFO cropverse POST /auth/register/shop -> 201 236.84ms
+2026-06-25 00:18:20,077 INFO cropverse POST /auth/register/shop -> 201 236.87ms
+2026-06-25 00:18:20,091 INFO cropverse POST /crops/ -> 201 12.53ms
+2026-06-25 00:18:20,095 INFO cropverse GET /farmers/me -> 200 3.02ms
+2026-06-25 00:18:20,106 INFO cropverse Gemini request skipped: GEMINI_API_KEY is not configured
+2026-06-25 00:18:20,119 INFO cropverse POST /assignments/ -> 201 21.83ms
+2026-06-25 00:18:20,169 INFO cropverse POST /demand/ -> 200 46.71ms
+2026-06-25 00:18:20,186 INFO cropverse PUT /demand/5039e8a6-1a88-4496-9b2f-5661a9254390/approve -> 200 16.06ms
+2026-06-25 00:18:20,202 INFO cropverse PUT /demand/5039e8a6-1a88-4496-9b2f-5661a9254390/planned -> 200 14.51ms
+2026-06-25 00:18:20,209 INFO cropverse GET /demand/insights/high-demand -> 200 5.24ms
+2026-06-25 00:18:20,213 INFO cropverse GET /notifications/ -> 200 2.90ms
+2026-06-25 00:18:20,237 INFO cropverse GET / -> 200 1.20ms
+2026-06-25 00:18:20,258 INFO cropverse GET /health/db -> 200 2.12ms
+2026-06-25 00:18:20,281 INFO cropverse GET /reports/farmers -> 401 1.38ms
+2026-06-25 00:18:20,309 INFO cropverse POST /upload/image -> 401 3.39ms
+2026-06-25 00:32:39,184 INFO cropverse POST /chatbot/chat -> 401 14.09ms
+2026-06-25 00:32:41,765 INFO cropverse POST /auth/login -> 200 360.67ms
+2026-06-25 00:32:42,067 INFO cropverse GET /prices/ -> 200 62.83ms
+2026-06-25 00:32:42,086 INFO cropverse GET /crops/ -> 200 82.04ms
+2026-06-25 00:32:42,096 INFO cropverse GET /notifications/ -> 200 98.13ms
+2026-06-25 00:32:42,107 INFO cropverse GET /shops/ -> 200 102.77ms
+2026-06-25 00:32:42,118 INFO cropverse GET /farmers/ -> 200 95.44ms
+2026-06-25 00:32:42,136 INFO cropverse GET /orders/ -> 200 131.54ms
+2026-06-25 00:32:42,137 INFO cropverse GET /prices/ -> 200 58.98ms
+2026-06-25 00:32:42,151 INFO cropverse GET /crops/ -> 200 45.73ms
+2026-06-25 00:32:42,167 INFO cropverse GET /notifications/ -> 200 56.72ms
+2026-06-25 00:32:42,173 INFO cropverse GET /shops/ -> 200 50.95ms
+2026-06-25 00:32:42,174 INFO cropverse GET /farmers/ -> 200 46.18ms
+2026-06-25 00:32:42,180 INFO cropverse GET /orders/ -> 200 36.39ms
+2026-06-25 00:32:42,282 INFO cropverse GET /analytics/admin -> 200 72.59ms
+2026-06-25 00:32:42,324 INFO cropverse GET /analytics/admin -> 200 35.83ms
+2026-06-25 00:33:08,712 INFO cropverse Gemini request payload: model=gemini-2.5-flash-lite prompt_chars=686 contents=1
+2026-06-25 00:33:12,426 INFO cropverse Gemini response status: 200 attempt=1
+2026-06-25 00:33:12,430 INFO cropverse POST /chatbot/chat -> 200 3741.97ms
+2026-06-25 00:33:42,919 INFO cropverse GET /prices/ -> 200 40.58ms
+2026-06-25 00:33:42,951 INFO cropverse GET /notifications/ -> 200 72.61ms
+2026-06-25 00:33:42,960 INFO cropverse GET /prices/ -> 200 25.08ms
+2026-06-25 00:33:42,977 INFO cropverse GET /notifications/ -> 200 20.76ms
+2026-06-25 00:34:19,526 INFO cropverse POST /auth/login -> 200 233.61ms
+2026-06-25 00:34:19,741 INFO cropverse GET /prices/ -> 200 71.73ms
+2026-06-25 00:34:19,748 INFO cropverse GET /baby-crops/marketplace -> 200 52.33ms
+2026-06-25 00:34:19,762 INFO cropverse GET /notifications/ -> 200 121.40ms
+2026-06-25 00:34:19,782 INFO cropverse GET /prices/ -> 200 30.93ms
+2026-06-25 00:34:19,788 INFO cropverse GET /orders/me -> 200 85.74ms
+2026-06-25 00:34:19,789 INFO cropverse GET /demand/me -> 200 86.95ms
+2026-06-25 00:34:19,795 INFO cropverse GET /baby-crops/marketplace -> 200 30.39ms
+2026-06-25 00:34:19,817 INFO cropverse GET /notifications/ -> 200 49.31ms
+2026-06-25 00:34:19,858 INFO cropverse GET /orders/me -> 200 62.92ms
+2026-06-25 00:34:19,863 INFO cropverse GET /demand/me -> 200 59.30ms
+2026-06-25 00:34:20,564 INFO cropverse POST /auth/login -> 200 264.64ms
+2026-06-25 00:34:20,807 INFO cropverse GET /prices/ -> 200 58.96ms
+2026-06-25 00:34:20,814 INFO cropverse GET /crops/ -> 200 47.49ms
+2026-06-25 00:34:20,837 INFO cropverse GET /notifications/ -> 200 91.44ms
+2026-06-25 00:34:20,845 INFO cropverse GET /farmers/ -> 200 82.06ms
+2026-06-25 00:34:20,853 INFO cropverse GET /orders/ -> 200 85.53ms
+2026-06-25 00:34:20,864 INFO cropverse GET /shops/ -> 200 101.23ms
+2026-06-25 00:34:20,885 INFO cropverse GET /crops/ -> 200 53.74ms
+2026-06-25 00:34:20,886 INFO cropverse GET /prices/ -> 200 64.22ms
+2026-06-25 00:34:20,928 INFO cropverse GET /farmers/ -> 200 68.24ms
+2026-06-25 00:34:20,930 INFO cropverse GET /notifications/ -> 200 82.94ms
+2026-06-25 00:34:20,937 INFO cropverse GET /orders/ -> 200 68.68ms
+2026-06-25 00:34:20,944 INFO cropverse GET /shops/ -> 200 70.58ms
+2026-06-25 00:34:21,036 INFO cropverse GET /analytics/admin -> 200 68.36ms
+2026-06-25 00:34:21,102 INFO cropverse GET /analytics/admin -> 200 61.42ms
+2026-06-25 00:34:30,052 INFO cropverse GET /crops/ -> 200 32.60ms
+2026-06-25 00:34:30,073 INFO cropverse GET /demand/me -> 200 55.52ms
+2026-06-25 00:34:30,081 INFO cropverse GET /crops/ -> 200 21.24ms
+2026-06-25 00:34:30,144 INFO cropverse GET /demand/me -> 200 62.84ms
+2026-06-25 00:34:31,535 INFO cropverse GET /notifications/ -> 200 83.00ms
+2026-06-25 00:34:31,614 INFO cropverse GET /notifications/ -> 200 56.42ms
+2026-06-25 00:34:33,229 INFO cropverse PUT /notifications/8fce9763-54c9-47d0-8abb-0b87f00a118c/read -> 200 62.72ms
+2026-06-25 00:34:34,051 INFO cropverse PUT /notifications/7f041129-dbb7-48a2-849d-dafe0cf99c8f/read -> 200 27.83ms
+2026-06-25 00:34:37,929 INFO cropverse GET /crops/ -> 200 239.92ms
+2026-06-25 00:34:38,010 INFO cropverse GET /farmers/ -> 200 351.29ms
+2026-06-25 00:34:38,018 INFO cropverse GET /shops/ -> 200 352.35ms
+2026-06-25 00:34:38,068 INFO cropverse GET /orders/ -> 200 381.07ms
+2026-06-25 00:34:38,166 INFO cropverse GET /crops/ -> 200 119.58ms
+2026-06-25 00:34:38,302 INFO cropverse GET /farmers/ -> 200 266.12ms
+2026-06-25 00:34:38,353 INFO cropverse GET /shops/ -> 200 300.90ms
+2026-06-25 00:34:38,390 INFO cropverse GET /orders/ -> 200 304.71ms
+2026-06-25 00:34:38,457 INFO cropverse GET /analytics/admin -> 200 279.95ms
+2026-06-25 00:34:38,552 INFO cropverse GET /analytics/admin -> 200 90.99ms
+2026-06-25 00:34:55,767 INFO cropverse POST /demand/ -> 200 82.49ms
+2026-06-25 00:34:55,818 INFO cropverse GET /crops/ -> 200 45.66ms
+2026-06-25 00:34:55,850 INFO cropverse GET /demand/me -> 200 74.92ms
+2026-06-25 00:34:55,861 INFO cropverse GET /crops/ -> 200 33.61ms
+2026-06-25 00:34:55,916 INFO cropverse GET /demand/me -> 200 43.47ms
+2026-06-25 00:34:58,133 INFO cropverse GET /notifications/ -> 200 20.01ms
+2026-06-25 00:34:58,182 INFO cropverse GET /notifications/ -> 200 37.32ms
+2026-06-25 00:35:04,821 INFO cropverse PUT /notifications/fdd73f05-5609-474a-96a7-b6123a43fd7a/read -> 200 13.50ms
+2026-06-25 00:35:09,862 INFO cropverse GET /crops/ -> 200 31.93ms
+2026-06-25 00:35:09,892 INFO cropverse GET /crops/ -> 200 17.72ms
+2026-06-25 00:35:11,984 INFO cropverse GET /demand/ -> 200 56.66ms
+2026-06-25 00:35:12,024 INFO cropverse GET /demand/ -> 200 26.90ms
+2026-06-25 00:35:15,470 INFO cropverse PUT /demand/8b69fce0-7809-4b03-aeb2-ff3563897e1c/approve -> 200 30.17ms
+2026-06-25 00:35:15,515 INFO cropverse GET /crops/ -> 200 33.81ms
+2026-06-25 00:35:15,516 INFO cropverse GET /demand/ -> 200 38.71ms
+2026-06-25 00:35:15,530 INFO cropverse GET /demand/me -> 200 48.23ms
+2026-06-25 00:35:15,536 INFO cropverse GET /demand/ -> 200 14.99ms
+2026-06-25 00:35:18,425 INFO cropverse PUT /demand/38a3d79d-08fa-4d66-bc77-3b79caa3e89b/approve -> 200 58.71ms
+2026-06-25 00:35:18,467 INFO cropverse GET /crops/ -> 200 33.76ms
+2026-06-25 00:35:18,487 INFO cropverse GET /demand/ -> 200 56.75ms
+2026-06-25 00:35:18,499 INFO cropverse GET /demand/me -> 200 66.05ms
+2026-06-25 00:35:18,530 INFO cropverse GET /demand/ -> 200 35.63ms
+2026-06-25 00:35:20,286 INFO cropverse PUT /demand/5bf9c8d9-3760-4608-90b3-91eb075a189d/approve -> 200 39.95ms
+2026-06-25 00:35:20,328 INFO cropverse GET /crops/ -> 200 31.38ms
+2026-06-25 00:35:20,332 INFO cropverse GET /demand/ -> 200 42.49ms
+2026-06-25 00:35:20,355 INFO cropverse GET /demand/me -> 200 58.93ms
+2026-06-25 00:35:20,373 INFO cropverse PUT /demand/5bf9c8d9-3760-4608-90b3-91eb075a189d/approve -> 200 104.71ms
+2026-06-25 00:35:20,396 INFO cropverse GET /demand/ -> 200 49.71ms
+2026-06-25 00:35:20,419 INFO cropverse GET /crops/ -> 200 36.10ms
+2026-06-25 00:35:20,436 INFO cropverse GET /demand/ -> 200 28.66ms
+2026-06-25 00:35:20,437 INFO cropverse GET /demand/me -> 200 55.31ms
+2026-06-25 00:35:20,454 INFO cropverse GET /demand/ -> 200 10.93ms
+2026-06-25 00:35:24,812 INFO cropverse GET /notifications/ -> 200 19.73ms
+2026-06-25 00:35:24,822 INFO cropverse GET /notifications/ -> 200 8.50ms
+2026-06-25 00:35:27,716 INFO cropverse PUT /notifications/0cf6220f-82ee-427d-932d-3f4638232cab/read -> 200 12.85ms
+2026-06-25 00:35:28,920 INFO cropverse PUT /notifications/1f52738e-2b00-4a8e-b01a-d943998a45d0/read -> 200 11.77ms
+2026-06-25 00:35:30,428 INFO cropverse PUT /notifications/b604fa44-f878-45dc-b4a9-a6f8371888e4/read -> 200 15.92ms
+2026-06-25 00:35:30,914 INFO cropverse PUT /notifications/50ee1cf4-e2dc-4cc2-be19-c06431d95a33/read -> 200 12.68ms
+2026-06-25 00:35:32,043 INFO cropverse PUT /notifications/b67f2a7e-f681-43e4-b0b0-8e9e3928e7b1/read -> 200 15.28ms
+2026-06-25 00:35:50,663 INFO cropverse PUT /demand/abeee60b-b106-45c4-a4f9-c9bbebdb7e66/approve -> 200 45.74ms
+2026-06-25 00:35:50,715 INFO cropverse GET /demand/ -> 200 46.77ms
+2026-06-25 00:35:50,730 INFO cropverse GET /demand/ -> 200 8.03ms
+2026-06-25 00:35:52,450 INFO cropverse PUT /notifications/b682474e-43bd-4437-86aa-37ea7aa1ed6b/read -> 200 20.11ms
+2026-06-25 00:36:06,577 INFO cropverse PUT /demand/5bf9c8d9-3760-4608-90b3-91eb075a189d/planned -> 200 53.34ms
+2026-06-25 00:36:06,601 INFO cropverse GET /demand/ -> 200 20.00ms
+2026-06-25 00:36:06,621 INFO cropverse GET /demand/ -> 200 13.85ms
+2026-06-25 00:36:09,631 INFO cropverse PUT /demand/5bf9c8d9-3760-4608-90b3-91eb075a189d/approve -> 200 34.62ms
+2026-06-25 00:36:09,658 INFO cropverse GET /demand/ -> 200 20.25ms
+2026-06-25 00:36:09,679 INFO cropverse GET /demand/ -> 200 16.42ms
+2026-06-25 00:36:13,559 INFO cropverse PUT /notifications/1cb66ff6-16cc-4f04-a1cd-673681557db9/read -> 200 24.98ms
+2026-06-25 00:36:14,450 INFO cropverse PUT /notifications/01fdea3f-27bd-45aa-b97c-c2f3ca7c96da/read -> 200 12.95ms
+2026-06-25 00:36:26,066 INFO cropverse GET /crops/ -> 200 39.31ms
+2026-06-25 00:36:26,091 INFO cropverse GET /farmers/ -> 200 65.27ms
+2026-06-25 00:36:26,121 INFO cropverse GET /crops/ -> 200 42.69ms
+2026-06-25 00:36:26,137 INFO cropverse GET /farmers/ -> 200 39.33ms
+2026-06-25 00:36:33,204 INFO cropverse GET /notifications/ -> 200 10.73ms
+2026-06-25 00:36:33,224 INFO cropverse GET /notifications/ -> 200 17.33ms
+2026-06-25 00:37:09,166 INFO cropverse POST /auth/login -> 200 241.51ms
+2026-06-25 00:37:09,314 INFO cropverse GET /prices/ -> 200 68.65ms
+2026-06-25 00:37:09,331 INFO cropverse GET /notifications/ -> 200 107.23ms
+2026-06-25 00:37:09,347 INFO cropverse GET /demand/insights/high-demand -> 200 85.15ms
+2026-06-25 00:37:09,359 INFO cropverse GET /assignments/me -> 200 97.29ms
+2026-06-25 00:37:09,360 INFO cropverse GET /prices/ -> 200 37.46ms
+2026-06-25 00:37:09,375 INFO cropverse GET /notifications/ -> 200 32.47ms
+2026-06-25 00:37:09,383 INFO cropverse GET /demand/insights/high-demand -> 200 30.57ms
+2026-06-25 00:37:09,405 INFO cropverse GET /assignments/me -> 200 40.01ms
+2026-06-25 00:37:33,013 INFO cropverse GET /assignments/me -> 200 46.56ms
+2026-06-25 00:37:33,034 INFO cropverse GET /baby-crops/ -> 200 70.19ms
+2026-06-25 00:37:33,064 INFO cropverse GET /assignments/me -> 200 45.36ms
+2026-06-25 00:37:33,074 INFO cropverse GET /baby-crops/ -> 200 34.26ms
+2026-06-25 00:38:46,592 INFO cropverse POST /auth/login -> 200 238.08ms
+2026-06-25 00:38:46,736 INFO cropverse GET /baby-crops/marketplace -> 200 39.68ms
+2026-06-25 00:38:46,737 INFO cropverse GET /prices/ -> 200 45.92ms
+2026-06-25 00:38:46,749 INFO cropverse GET /notifications/ -> 200 78.59ms
+2026-06-25 00:38:46,784 INFO cropverse GET /orders/me -> 200 87.13ms
+2026-06-25 00:38:46,793 INFO cropverse GET /demand/me -> 200 96.32ms
+2026-06-25 00:38:46,797 INFO cropverse GET /prices/ -> 200 45.32ms
+2026-06-25 00:38:46,815 INFO cropverse GET /baby-crops/marketplace -> 200 62.10ms
+2026-06-25 00:38:46,829 INFO cropverse GET /notifications/ -> 200 68.63ms
+2026-06-25 00:38:46,852 INFO cropverse GET /orders/me -> 200 51.05ms
+2026-06-25 00:38:46,860 INFO cropverse GET /demand/me -> 200 53.71ms
+2026-06-25 00:38:50,501 INFO cropverse GET /orders/me -> 200 27.91ms
+2026-06-25 00:38:50,519 INFO cropverse GET /orders/me -> 200 16.29ms
+2026-06-25 00:39:01,850 INFO cropverse GET /crops/ -> 200 63.67ms
+2026-06-25 00:39:01,903 INFO cropverse GET /demand/me -> 200 115.30ms
+2026-06-25 00:39:01,924 INFO cropverse GET /crops/ -> 200 64.75ms
+2026-06-25 00:39:01,969 INFO cropverse GET /demand/me -> 200 33.15ms
+2026-06-25 00:39:02,232 INFO cropverse GET /baby-crops/marketplace -> 200 22.33ms
+2026-06-25 00:39:02,249 INFO cropverse GET /baby-crops/marketplace -> 200 13.23ms
+2026-06-25 00:39:15,229 INFO cropverse GET /demand/insights/high-demand -> 200 43.78ms
+2026-06-25 00:39:15,240 INFO cropverse GET /assignments/me -> 200 56.90ms
+2026-06-25 00:39:15,307 INFO cropverse GET /demand/insights/high-demand -> 200 45.24ms
+2026-06-25 00:39:15,314 INFO cropverse GET /assignments/me -> 200 51.81ms
+2026-06-25 00:39:16,655 INFO cropverse GET /assignments/me -> 200 47.39ms
+2026-06-25 00:39:16,658 INFO cropverse GET /baby-crops/ -> 200 49.42ms
+2026-06-25 00:39:16,707 INFO cropverse GET /assignments/me -> 200 45.86ms
+2026-06-25 00:39:16,712 INFO cropverse GET /baby-crops/ -> 200 46.15ms
+2026-06-25 00:39:30,831 INFO cropverse GET /profile/me -> 200 21.13ms
+2026-06-25 00:39:30,900 INFO cropverse GET /profile/me -> 200 47.79ms
+2026-06-25 00:39:30,917 INFO cropverse GET /assignments/me -> 200 55.86ms
+2026-06-25 00:39:30,928 INFO cropverse GET /baby-crops/ -> 200 64.15ms
+2026-06-25 00:39:30,968 INFO cropverse GET /assignments/me -> 200 42.25ms
+2026-06-25 00:39:30,982 INFO cropverse GET /baby-crops/ -> 200 49.92ms
+2026-06-25 00:39:34,836 INFO cropverse POST /auth/login -> 200 238.50ms
+2026-06-25 00:39:34,949 INFO cropverse GET /prices/ -> 200 66.00ms
+2026-06-25 00:39:34,971 INFO cropverse GET /crops/ -> 200 78.91ms
+2026-06-25 00:39:34,976 INFO cropverse GET /notifications/ -> 200 101.36ms
+2026-06-25 00:39:34,989 INFO cropverse GET /farmers/ -> 200 107.52ms
+2026-06-25 00:39:35,009 INFO cropverse GET /orders/ -> 200 117.26ms
+2026-06-25 00:39:35,019 INFO cropverse GET /shops/ -> 200 127.21ms
+2026-06-25 00:39:35,033 INFO cropverse GET /prices/ -> 200 68.69ms
+2026-06-25 00:39:35,042 INFO cropverse GET /crops/ -> 200 45.29ms
+2026-06-25 00:39:35,093 INFO cropverse GET /notifications/ -> 200 96.70ms
+2026-06-25 00:39:35,100 INFO cropverse GET /farmers/ -> 200 92.71ms
+2026-06-25 00:39:35,112 INFO cropverse GET /orders/ -> 200 95.66ms
+2026-06-25 00:39:35,127 INFO cropverse GET /shops/ -> 200 97.01ms
+2026-06-25 00:39:35,189 INFO cropverse GET /analytics/admin -> 200 103.65ms
+2026-06-25 00:39:35,237 INFO cropverse GET /analytics/admin -> 200 41.70ms
+2026-06-25 00:39:36,549 INFO cropverse GET /crops/ -> 200 13.66ms
+2026-06-25 00:39:36,576 INFO cropverse GET /farmers/ -> 200 42.58ms
+2026-06-25 00:39:36,613 INFO cropverse GET /crops/ -> 200 49.43ms
+2026-06-25 00:39:36,633 INFO cropverse GET /farmers/ -> 200 41.19ms
+2026-06-25 00:39:48,003 INFO cropverse POST /assignments/ -> 400 27.30ms
+2026-06-25 00:39:58,199 INFO cropverse Gemini request payload: model=gemini-1.5-flash prompt_chars=590 contents=1
+2026-06-25 00:39:58,948 INFO cropverse Gemini request payload: model=gemini-1.5-flash prompt_chars=590 contents=1
+2026-06-25 00:39:58,981 INFO cropverse Gemini response status: 404 attempt=1
+2026-06-25 00:39:58,982 WARNING cropverse Gemini request failed: HTTPError
+2026-06-25 00:39:59,006 INFO cropverse POST /assignments/ -> 201 825.80ms
+2026-06-25 00:39:59,721 INFO cropverse Gemini response status: 404 attempt=1
+2026-06-25 00:39:59,721 WARNING cropverse Gemini request failed: HTTPError
+2026-06-25 00:39:59,743 INFO cropverse POST /assignments/ -> 201 811.20ms
+2026-06-25 00:40:09,228 INFO cropverse POST /auth/login -> 200 238.98ms
+2026-06-25 00:40:09,281 INFO cropverse GET /prices/ -> 200 20.36ms
+2026-06-25 00:40:09,298 INFO cropverse GET /notifications/ -> 200 41.81ms
+2026-06-25 00:40:09,331 INFO cropverse GET /demand/insights/high-demand -> 200 68.70ms
+2026-06-25 00:40:09,360 INFO cropverse GET /assignments/me -> 200 98.39ms
+2026-06-25 00:40:09,362 INFO cropverse GET /prices/ -> 200 71.20ms
+2026-06-25 00:40:09,382 INFO cropverse GET /notifications/ -> 200 43.05ms
+2026-06-25 00:40:09,390 INFO cropverse GET /demand/insights/high-demand -> 200 43.69ms
+2026-06-25 00:40:09,405 INFO cropverse GET /assignments/me -> 200 35.75ms
+2026-06-25 00:40:16,180 INFO cropverse GET /assignments/me -> 200 62.35ms
+2026-06-25 00:40:16,188 INFO cropverse GET /baby-crops/ -> 200 65.48ms
+2026-06-25 00:40:16,231 INFO cropverse GET /assignments/me -> 200 38.80ms
+2026-06-25 00:40:16,244 INFO cropverse GET /baby-crops/ -> 200 45.12ms
+2026-06-25 00:40:20,678 INFO cropverse PUT /assignments/d9e27e9b-00fa-4e26-a598-2dd6a8dc64be/status -> 200 33.49ms
+2026-06-25 00:40:21,916 INFO cropverse PUT /assignments/23db9f62-7fa0-440a-a410-fd7897963b73/status -> 200 37.23ms
+2026-06-25 00:40:57,660 INFO cropverse POST /baby-crops/ -> 200 52.62ms
+2026-06-25 00:40:57,681 INFO cropverse GET /baby-crops/marketplace -> 200 16.45ms
+2026-06-25 00:40:57,693 INFO cropverse GET /assignments/me -> 200 25.89ms
+2026-06-25 00:40:57,695 INFO cropverse GET /baby-crops/ -> 200 28.32ms
+2026-06-25 00:41:32,641 INFO cropverse POST /baby-crops/ -> 200 41.11ms
+2026-06-25 00:41:32,665 INFO cropverse GET /baby-crops/ -> 200 17.80ms
+2026-06-25 00:41:32,668 INFO cropverse GET /baby-crops/marketplace -> 200 19.48ms
+2026-06-25 00:41:32,676 INFO cropverse GET /assignments/me -> 200 28.08ms
+2026-06-25 00:41:36,217 INFO cropverse PUT /baby-crops/bc796cdf-5e4b-42ed-9ee2-a02ae9874ce9/stage -> 200 33.39ms
+2026-06-25 00:41:36,230 INFO cropverse GET /baby-crops/marketplace -> 200 10.13ms
+2026-06-25 00:41:37,600 INFO cropverse PUT /baby-crops/706a4b31-6c35-42be-a6ba-baaece5f4419/stage -> 200 39.22ms
+2026-06-25 00:41:37,639 INFO cropverse GET /baby-crops/marketplace -> 200 11.65ms
+2026-06-25 00:41:54,886 INFO cropverse POST /orders/ -> 200 65.04ms
+2026-06-25 00:41:54,901 INFO cropverse GET /baby-crops/marketplace -> 200 12.06ms
+2026-06-25 00:41:54,921 INFO cropverse GET /baby-crops/marketplace -> 200 15.41ms
+2026-06-25 00:41:58,334 INFO cropverse GET /orders/me -> 200 72.69ms
+2026-06-25 00:41:58,387 INFO cropverse GET /orders/me -> 200 41.86ms
+2026-06-25 00:42:07,521 INFO cropverse PUT /orders/a262bd64-6e81-45bc-bfa1-214a2260f933/accept -> 200 40.25ms
+2026-06-25 00:42:07,554 INFO cropverse GET /orders/me -> 200 30.00ms
+2026-06-25 00:42:07,563 INFO cropverse GET /baby-crops/marketplace -> 200 33.96ms
+2026-06-25 00:42:07,572 INFO cropverse GET /orders/me -> 200 13.23ms
+2026-06-25 00:42:09,247 INFO cropverse PUT /orders/a262bd64-6e81-45bc-bfa1-214a2260f933/dispatch -> 200 39.20ms
+2026-06-25 00:42:09,270 INFO cropverse GET /baby-crops/marketplace -> 200 16.91ms
+2026-06-25 00:42:09,271 INFO cropverse GET /orders/me -> 200 19.70ms
+2026-06-25 00:42:09,291 INFO cropverse GET /orders/me -> 200 16.28ms
+2026-06-25 00:42:10,665 INFO cropverse PUT /orders/a262bd64-6e81-45bc-bfa1-214a2260f933/deliver -> 200 35.25ms
+2026-06-25 00:42:10,690 INFO cropverse GET /orders/me -> 200 20.17ms
+2026-06-25 00:42:10,700 INFO cropverse GET /baby-crops/marketplace -> 200 28.72ms
+2026-06-25 00:42:10,718 INFO cropverse GET /orders/me -> 200 18.17ms
+2026-06-25 00:42:12,472 INFO cropverse PUT /orders/0b3cd728-52cf-46b8-a434-5cd4da44fca7/accept -> 200 34.96ms
+2026-06-25 00:42:12,513 INFO cropverse GET /orders/me -> 200 34.85ms
+2026-06-25 00:42:12,517 INFO cropverse GET /baby-crops/marketplace -> 200 39.92ms
+2026-06-25 00:42:12,528 INFO cropverse GET /orders/me -> 200 11.56ms
+2026-06-25 00:42:13,398 INFO cropverse PUT /orders/0b3cd728-52cf-46b8-a434-5cd4da44fca7/dispatch -> 200 33.30ms
+2026-06-25 00:42:13,421 INFO cropverse GET /orders/me -> 200 18.71ms
+2026-06-25 00:42:13,424 INFO cropverse GET /baby-crops/marketplace -> 200 20.89ms
+2026-06-25 00:42:13,443 INFO cropverse GET /orders/me -> 200 15.36ms
+2026-06-25 00:42:14,620 INFO cropverse PUT /orders/0b3cd728-52cf-46b8-a434-5cd4da44fca7/deliver -> 200 38.40ms
+2026-06-25 00:42:14,649 INFO cropverse GET /orders/me -> 200 24.63ms
+2026-06-25 00:42:14,652 INFO cropverse GET /baby-crops/marketplace -> 200 24.40ms
+2026-06-25 00:42:14,669 INFO cropverse GET /orders/me -> 200 17.21ms
+2026-06-25 00:42:15,685 INFO cropverse PUT /orders/e4357650-7daa-4848-8e6b-50121c9d9867/accept -> 200 32.24ms
+2026-06-25 00:42:15,732 INFO cropverse GET /baby-crops/marketplace -> 200 43.60ms
+2026-06-25 00:42:15,734 INFO cropverse GET /orders/me -> 200 44.11ms
+2026-06-25 00:42:15,754 INFO cropverse GET /orders/me -> 200 17.15ms
+2026-06-25 00:42:16,388 INFO cropverse PUT /orders/e4357650-7daa-4848-8e6b-50121c9d9867/dispatch -> 200 38.26ms
+2026-06-25 00:42:16,417 INFO cropverse GET /orders/me -> 200 24.21ms
+2026-06-25 00:42:16,421 INFO cropverse GET /baby-crops/marketplace -> 200 24.89ms
+2026-06-25 00:42:16,441 INFO cropverse GET /orders/me -> 200 18.70ms
+2026-06-25 00:42:16,963 INFO cropverse PUT /orders/e4357650-7daa-4848-8e6b-50121c9d9867/deliver -> 200 45.07ms
+2026-06-25 00:42:17,000 INFO cropverse GET /orders/me -> 200 32.37ms
+2026-06-25 00:42:17,004 INFO cropverse GET /baby-crops/marketplace -> 200 32.17ms
+2026-06-25 00:42:17,040 INFO cropverse GET /orders/me -> 200 35.86ms
+2026-06-25 00:42:18,669 INFO cropverse PUT /orders/831c12f3-6e00-442c-ad78-b2d535fa0e3a/accept -> 200 30.84ms
+2026-06-25 00:42:18,696 INFO cropverse GET /baby-crops/marketplace -> 200 22.81ms
+2026-06-25 00:42:18,699 INFO cropverse GET /orders/me -> 200 23.38ms
+2026-06-25 00:42:18,711 INFO cropverse GET /orders/me -> 200 9.32ms
+2026-06-25 00:42:20,325 INFO cropverse PUT /orders/831c12f3-6e00-442c-ad78-b2d535fa0e3a/dispatch -> 200 40.44ms
+2026-06-25 00:42:20,348 INFO cropverse GET /baby-crops/marketplace -> 200 20.63ms
+2026-06-25 00:42:20,359 INFO cropverse GET /orders/me -> 200 23.36ms
+2026-06-25 00:42:20,372 INFO cropverse GET /orders/me -> 200 8.84ms
+2026-06-25 00:42:21,929 INFO cropverse PUT /orders/831c12f3-6e00-442c-ad78-b2d535fa0e3a/deliver -> 200 42.28ms
+2026-06-25 00:42:21,967 INFO cropverse GET /orders/me -> 200 33.44ms
+2026-06-25 00:42:21,969 INFO cropverse GET /baby-crops/marketplace -> 200 32.89ms
+2026-06-25 00:42:21,985 INFO cropverse GET /orders/me -> 200 14.92ms
+2026-06-25 00:42:36,935 INFO cropverse POST /orders/ -> 200 49.70ms
+2026-06-25 00:42:36,960 INFO cropverse GET /baby-crops/marketplace -> 200 20.84ms
+2026-06-25 00:42:36,970 INFO cropverse GET /orders/me -> 200 28.01ms
+2026-06-25 00:42:37,002 INFO cropverse GET /baby-crops/marketplace -> 200 22.71ms
+2026-06-25 00:42:42,548 INFO cropverse PUT /orders/3d9f15b6-1d81-4f53-b86b-29c17ae207c1/accept -> 200 35.21ms
+2026-06-25 00:42:42,584 INFO cropverse GET /orders/me -> 200 31.02ms
+2026-06-25 00:42:42,587 INFO cropverse GET /baby-crops/marketplace -> 200 28.43ms
+2026-06-25 00:42:42,600 INFO cropverse GET /orders/me -> 200 11.80ms
+2026-06-25 00:42:44,054 INFO cropverse PUT /orders/3d9f15b6-1d81-4f53-b86b-29c17ae207c1/dispatch -> 200 33.31ms
+2026-06-25 00:42:44,079 INFO cropverse GET /orders/me -> 200 21.14ms
+2026-06-25 00:42:44,087 INFO cropverse GET /baby-crops/marketplace -> 200 26.19ms
+2026-06-25 00:42:44,105 INFO cropverse GET /orders/me -> 200 16.90ms
+2026-06-25 00:42:45,703 INFO cropverse PUT /orders/3d9f15b6-1d81-4f53-b86b-29c17ae207c1/deliver -> 200 33.88ms
+2026-06-25 00:42:45,734 INFO cropverse GET /orders/me -> 200 27.51ms
+2026-06-25 00:42:45,737 INFO cropverse GET /baby-crops/marketplace -> 200 27.33ms
+2026-06-25 00:42:45,766 INFO cropverse GET /orders/me -> 200 27.61ms
+2026-06-25 00:42:47,233 INFO cropverse GET /notifications/ -> 200 15.25ms
+2026-06-25 00:42:47,313 INFO cropverse GET /notifications/ -> 200 69.09ms
+2026-06-25 00:42:49,008 INFO cropverse PUT /notifications/e8e7dcc5-3958-458f-8dfb-a77c390c6b1a/read -> 200 12.78ms
+2026-06-25 00:42:49,705 INFO cropverse PUT /notifications/4bc79a1a-a1fa-4dc9-90eb-7e4f26bcff78/read -> 200 21.71ms
+2026-06-25 00:42:51,249 INFO cropverse PUT /notifications/48b5bae0-f3f7-40f2-b32b-03e737bea522/read -> 200 13.80ms
+2026-06-25 00:42:51,748 INFO cropverse PUT /notifications/e6eb556c-dd39-499f-9750-e6578560bd0b/read -> 200 16.97ms
+2026-06-25 00:42:53,610 INFO cropverse PUT /notifications/0b1200f6-2622-4753-a163-4f1e3a5907d6/read -> 200 14.16ms
+2026-06-25 00:42:56,003 INFO cropverse PUT /notifications/046e3f52-8ecf-459e-9559-00c910ed0e0f/read -> 200 11.67ms
+2026-06-25 00:42:56,530 INFO cropverse PUT /notifications/7757ea34-8954-4c35-8108-ed28228997a4/read -> 200 15.46ms
+2026-06-25 00:42:57,928 INFO cropverse PUT /notifications/536b5821-5d08-4381-b7b3-06050275156a/read -> 200 18.73ms
+2026-06-25 00:42:58,341 INFO cropverse PUT /notifications/3a58ed26-b3b9-475f-a75c-aa458feb7b19/read -> 200 11.50ms
+2026-06-25 00:43:00,104 INFO cropverse PUT /notifications/8700ce6c-6d20-4b67-9058-14cb49abb567/read -> 200 19.79ms
+2026-06-25 00:43:00,793 INFO cropverse PUT /notifications/06510b72-e973-4485-a82e-1374fd80ee63/read -> 200 14.78ms
+2026-06-25 00:43:01,396 INFO cropverse PUT /notifications/7ceca1d7-7991-4520-93b4-b197b38f57e8/read -> 200 15.35ms
+2026-06-25 00:43:02,578 INFO cropverse PUT /notifications/9d9fc4a0-de28-476f-8314-886eb4e9d655/read -> 200 14.17ms
+2026-06-25 00:43:03,032 INFO cropverse PUT /notifications/381738b2-fca2-4c96-9d70-be6247561777/read -> 200 13.80ms
+2026-06-25 00:43:03,570 INFO cropverse PUT /notifications/612148af-16e8-4aa5-9c22-fe31494b7408/read -> 200 14.95ms
+2026-06-25 00:43:04,912 INFO cropverse PUT /notifications/ab91c178-c15d-4a28-87c8-b98c60b048ce/read -> 200 12.65ms
+2026-06-25 00:43:05,817 INFO cropverse PUT /notifications/4a698e5c-6358-42ab-921d-303ea37fe139/read -> 200 27.55ms
+2026-06-25 00:43:06,924 INFO cropverse PUT /notifications/460d7526-57a8-4d8f-a8ce-c04ba29d1d22/read -> 200 16.04ms
+2026-06-25 00:43:08,588 INFO cropverse PUT /notifications/a6fa862b-064f-46ab-98ec-a37b8b94ad4b/read -> 200 16.03ms
+2026-06-25 00:43:25,738 INFO cropverse GET /crops/ -> 200 14.68ms
+2026-06-25 00:43:25,768 INFO cropverse GET /demand/me -> 200 38.62ms
+2026-06-25 00:43:25,778 INFO cropverse GET /crops/ -> 200 30.73ms
+2026-06-25 00:43:25,821 INFO cropverse GET /demand/me -> 200 32.66ms
+2026-06-25 00:43:26,920 INFO cropverse GET /orders/me -> 200 38.41ms
+2026-06-25 00:43:26,952 INFO cropverse GET /orders/me -> 200 20.35ms

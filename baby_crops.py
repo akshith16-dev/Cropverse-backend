@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional, List
 from uuid import UUID
 from datetime import date
@@ -14,9 +14,13 @@ from models import (
     Crop,
     MarketPrice,
     User,
-    GrowthStage
+    UserRole,
+    GrowthStage,
+    AssignmentStatus,
 )
 from auth import require_farmer
+from notification_service import notify_role
+from websocket import manager
 
 router = APIRouter(
     prefix="/baby-crops",
@@ -27,7 +31,7 @@ class BabyCropCreate(BaseModel):
     assignment_id: UUID
     sowing_date: date
     expected_harvest: Optional[date] = None
-    quantity_kg: Optional[float] = None
+    quantity_kg: Optional[float] = Field(default=None, ge=0)
     notes: Optional[str] = None
 
 
@@ -85,6 +89,18 @@ async def create_baby_crop(
             detail="Not your assignment"
         )
 
+    if assignment.status not in {AssignmentStatus.accepted, AssignmentStatus.active}:
+        raise HTTPException(
+            status_code=400,
+            detail="Assignment must be accepted before creating a baby crop"
+        )
+
+    duplicate_result = await db.execute(
+        select(BabyCrop).where(BabyCrop.assignment_id == data.assignment_id)
+    )
+    if duplicate_result.scalar_one_or_none():
+        raise HTTPException(status_code=400, detail="Baby crop already exists for this assignment")
+
     baby_crop = BabyCrop(
         assignment_id=data.assignment_id,
         sowing_date=data.sowing_date,
@@ -94,7 +110,16 @@ async def create_baby_crop(
     )
 
     db.add(baby_crop)
+    crop_result = await db.execute(select(Crop).where(Crop.id == assignment.crop_id))
+    crop = crop_result.scalar_one_or_none()
+    await notify_role(
+        db,
+        UserRole.shop,
+        f"{crop.crop_name if crop else 'A crop'} is now available in the marketplace.",
+        "marketplace.updated",
+    )
     await db.commit()
+    await manager.broadcast("marketplace", {"event": "marketplace.updated", "baby_crop_id": str(baby_crop.id)})
 
     return {
         "message": "Baby crop created successfully"
@@ -210,9 +235,20 @@ async def update_growth_stage(
             detail="Not your baby crop"
         )
 
-    crop.growth_stage = GrowthStage(data.growth_stage)
+    try:
+        crop.growth_stage = GrowthStage(data.growth_stage)
+    except ValueError as exc:
+        allowed = ", ".join(stage.value for stage in GrowthStage)
+        raise HTTPException(status_code=400, detail=f"Invalid growth stage. Allowed values: {allowed}") from exc
 
+    await notify_role(
+        db,
+        UserRole.shop,
+        "A marketplace crop growth stage was updated.",
+        "marketplace.updated",
+    )
     await db.commit()
+    await manager.broadcast("marketplace", {"event": "marketplace.updated", "baby_crop_id": str(crop.id), "growth_stage": crop.growth_stage.value})
 
     return {
         "message": "Growth stage updated"

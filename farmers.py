@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional, List
 from uuid import UUID
 
@@ -36,7 +36,7 @@ class UpdateFarmer(BaseModel):
     latitude:   Optional[float] = None
     longitude:  Optional[float] = None
     soil_type:  Optional[str] = None
-    land_acres: Optional[float] = None
+    land_acres: Optional[float] = Field(default=None, gt=0)
 
 
 # ─── Get all farmers (admin only) ─────────

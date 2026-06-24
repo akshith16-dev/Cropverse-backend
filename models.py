@@ -30,6 +30,7 @@ class OrderStatus(str, enum.Enum):
     confirmed  = "confirmed"
     dispatched = "dispatched"
     delivered  = "delivered"
+    rejected   = "rejected"
     cancelled  = "cancelled"
 
 class OrderType(str, enum.Enum):
