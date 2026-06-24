@@ -33,6 +33,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "https://cropverse.vercel.app",
+         "https://cropverse-frontend-6nwcgkwj1-akshith16-devs-projects.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
