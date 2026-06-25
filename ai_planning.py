@@ -50,6 +50,7 @@ class AutoAssignmentResponse(BaseModel):
 @dataclass
 class CropSignals:
     demand_kg: float
+    latest_demand_at: datetime | None
     price_per_kg: float
     assigned_count: int
     previous_crop_name: str | None
@@ -103,15 +104,17 @@ async def _latest_previous_crop(db: AsyncSession, farmer_id: UUID) -> str | None
     return row[0] if row else None
 
 
-async def _signals_for_crop(db: AsyncSession, crop: Crop) -> tuple[float, float, int]:
-    demand = (
+async def _signals_for_crop(db: AsyncSession, crop: Crop) -> tuple[float, datetime | None, float, int]:
+    demand_row = (
         await db.execute(
-            select(func.sum(DemandRequest.quantity_kg)).where(
+            select(func.sum(DemandRequest.quantity_kg), func.max(DemandRequest.created_at)).where(
                 DemandRequest.crop_id == crop.id,
                 DemandRequest.status.in_(["open", "approved", "planned"]),
             )
         )
-    ).scalar() or 0
+    ).one()
+    demand = demand_row[0] or 0
+    latest_demand_at = demand_row[1]
     latest_price = await db.scalar(
         select(MarketPrice.price_per_kg)
         .where(MarketPrice.crop_id == crop.id)
@@ -122,7 +125,7 @@ async def _signals_for_crop(db: AsyncSession, crop: Crop) -> tuple[float, float,
         await db.execute(select(func.count(CropAssignment.id)).where(CropAssignment.crop_id == crop.id))
     ).scalar() or 0
     fallback_price = (crop.min_price + crop.max_price) / 2
-    return float(demand), float(latest_price or fallback_price), int(assigned_count)
+    return float(demand), latest_demand_at, float(latest_price or fallback_price), int(assigned_count)
 
 
 async def _rank_crops(
@@ -141,8 +144,8 @@ async def _rank_crops(
     max_demand = 1.0
     max_price = 1.0
     for crop in crops:
-        demand_kg, price_per_kg, assigned_count = await _signals_for_crop(db, crop)
-        crop_metrics[crop.id] = CropSignals(demand_kg, price_per_kg, assigned_count, previous_crop)
+        demand_kg, latest_demand_at, price_per_kg, assigned_count = await _signals_for_crop(db, crop)
+        crop_metrics[crop.id] = CropSignals(demand_kg, latest_demand_at, price_per_kg, assigned_count, previous_crop)
         max_demand = max(max_demand, demand_kg)
         max_price = max(max_price, price_per_kg)
 
@@ -196,7 +199,16 @@ async def _rank_crops(
             }
         )
 
-    return sorted(ranked, key=lambda item: (item["confidence"], item["expected_profit"]), reverse=True)[:limit]
+    return sorted(
+        ranked,
+        key=lambda item: (
+            item["confidence"],
+            crop_metrics[item["crop_id"]].demand_kg,
+            crop_metrics[item["crop_id"]].latest_demand_at or datetime.min,
+            item["expected_profit"],
+        ),
+        reverse=True,
+    )[:limit]
 
 
 async def save_recommendation(
@@ -348,7 +360,7 @@ async def auto_assign_farmer(
             )
         )
     ).scalar() or 0
-    demand_kg, _, _ = await _signals_for_crop(db, crop)
+    demand_kg, _, _, _ = await _signals_for_crop(db, crop)
     total_supply_kg = (total_farmers_this_crop + 1) * farmer.land_acres * crop.avg_yield_per_acre
     total_demand_kg = max(demand_kg, total_supply_kg * 0.8, 1000)
     xai = await generate_xai_explanation(farmer, farmer_user.name, crop, total_farmers_this_crop, total_demand_kg)
