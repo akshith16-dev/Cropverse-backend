@@ -87,6 +87,7 @@ class Farmer(Base):
     user        = relationship("User", back_populates="farmer")
     assignments = relationship("CropAssignment", back_populates="farmer")
     rotations   = relationship("CropRotation", back_populates="farmer")
+    recommendations = relationship("CropRecommendation", back_populates="farmer")
 
 
 # ─── Shops ────────────────────────────────
@@ -124,6 +125,7 @@ class Crop(Base):
     prices      = relationship("MarketPrice", back_populates="crop")
     demands     = relationship("DemandRequest", back_populates="crop")
     supply_logs = relationship("SupplyDemandLog", back_populates="crop")
+    recommendations = relationship("CropRecommendation", back_populates="crop")
 
 
 # ─── Crop Assignments ─────────────────────
@@ -158,6 +160,24 @@ class CropRotation(Base):
 
     farmer = relationship("Farmer", back_populates="rotations")
     crop   = relationship("Crop", back_populates="rotations")
+
+
+# ─── AI Crop Recommendations ─────────────
+
+class CropRecommendation(Base):
+    __tablename__ = "crop_recommendations"
+
+    id                  = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    farmer_id           = Column(UUID(as_uuid=True), ForeignKey("farmers.id"), nullable=False)
+    crop_id             = Column(UUID(as_uuid=True), ForeignKey("crops.id"), nullable=False)
+    recommendation_type = Column(String(50), nullable=False)
+    confidence          = Column(Float, nullable=False)
+    expected_profit     = Column(Float, nullable=False)
+    reasons             = Column(Text, nullable=False)
+    created_at          = Column(DateTime, default=datetime.utcnow)
+
+    farmer = relationship("Farmer", back_populates="recommendations")
+    crop   = relationship("Crop", back_populates="recommendations")
 
 
 # ─── Baby Crops ───────────────────────────

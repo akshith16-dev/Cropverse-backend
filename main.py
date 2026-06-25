@@ -27,6 +27,7 @@ import notifications
 import chatbot
 import websocket
 import ai
+import ai_planning
 import analytics
 import reports
 import uploads
@@ -112,6 +113,7 @@ app.include_router(chatbot.router)
 app.include_router(profile_router)
 app.include_router(websocket.router)
 app.include_router(ai.router)
+app.include_router(ai_planning.router)
 app.include_router(analytics.router)
 app.include_router(reports.router)
 app.include_router(uploads.router)

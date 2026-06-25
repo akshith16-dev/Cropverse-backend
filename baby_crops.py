@@ -21,6 +21,7 @@ from models import (
 from auth import require_farmer
 from notification_service import notify_role
 from websocket import manager
+from ai_planning import generate_and_save_rotation_recommendation
 
 router = APIRouter(
     prefix="/baby-crops",
@@ -247,8 +248,20 @@ async def update_growth_stage(
         "A marketplace crop growth stage was updated.",
         "marketplace.updated",
     )
+    rotation_recommendation = None
+    if crop.growth_stage == GrowthStage.harvest:
+        rotation_recommendation = await generate_and_save_rotation_recommendation(db, farmer)
     await db.commit()
     await manager.broadcast("marketplace", {"event": "marketplace.updated", "baby_crop_id": str(crop.id), "growth_stage": crop.growth_stage.value})
+    if rotation_recommendation:
+        await manager.broadcast(
+            f"notifications:{farmer.user_id}",
+            {
+                "event": "ai.rotation.created",
+                "recommendation_id": str(rotation_recommendation.id),
+                "farmer_id": str(farmer.id),
+            },
+        )
 
     return {
         "message": "Growth stage updated"
